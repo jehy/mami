@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Лабораторная #2 по базам данных</title>
+    <link href="http://fonts.googleapis.com/css?family=Raleway:700,300" rel="stylesheet"
+          type="text/css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/prettify.css">
+</head>
+<body>
+<div class="wrapper">
+    <header>
+        <div class="container">
+            <h2 class="lone-header">Лабораторная #2 по базам данных</h2>
+        </div>
+    </header>
+    <section>
+        <div class="container">
+            <ul class="docs-nav">
+                <li><a href="#content" class="cc-active">Содержание</a></li>
+                <li><a href="#manual" class="cc-active">Загрузка данных вручную</a></li>
+                <li><a href="#text" class="cc-active">Загрузка из текстового файла</a></li>
+                <li><a href="#soft" class="cc-active">Программная загрузка</a></li>
+                <li><a href="#data" class="cc-active">Данные для загрузки</a></li>
+                <li><a href="#questions" class="cc-active">Вопросы</a></li>
+                <li class="separator"></li>
+            </ul>
+            <div class="docs-content">
+                <h2>Лабораторная работа №2. Создание баз данных и таблиц в среде MYSQL. Информационное наполнение.</h2>
+
+                <b>Цель работы:</b> : Ознакомиться с возможностями СУБД MySQL и создать с его помощью базу данных, набор
+                таблиц в ней и заполнить таблицы данными для последующей работы.
+
+                <h3 id="content">Содержание работы и методические указания к ее выполнению</h3>
+                1. Ознакомиться с возможностями работы клиентского приложения MySQL.<br>
+                2. Изучить набор команд языка SQL, связанный с созданием базы данных, созданием, модификацией структуры
+                таблиц и их удалением, вставкой, модификацией и удалением записей таблиц.<br>
+                <b>Список команд:</b>
+                <ul>
+                    <li>create database DB_name создание базы данных</li>
+                    <li>Use database выбор существующей базы данных</li>
+                    <li>close database закрытие файлов текущей базы данных</li>
+                    <li>drop database удаление базы данных</li>
+                    <li>create table создание таблицы базы данных</li>
+                    <li>alter table модификация структуры базы данных</li>
+                    <li>drop table удаление таблицы базы данных</li>
+                    <li>insert добавление одной или нескольких строк в таблицу</li>
+                    <li>delete удаление одной или нескольких строк из таблицы</li>
+                    <li>update модификация одной или нескольких строк таблицы</li>
+                    <li>LOAD DATA INFILE загрузка данных в таблицы из файла</li>
+                </ul>
+                3. Создать базу данных.<br>
+                Создание базы данных в MySQL производится с помощью утилиты mysqladmin. Изначально существует только БД
+                mysql для администратора и БД test, в которую может войти любой пользователь и которая по умолчанию
+                пуста. Приведенный ниже пример иллюстрирует создание базы данных.
+
+                <pre class="prettyprint">
+Mysql/bin&gt;mysqladmin -u root -p create data_name
+Enter password:******
+Database "data_name" created.
+mysqlbin&gt;
+                </pre>
+                Где data_name – имя создаваемой БД. Проверить, что БД создана можно ранее рассмотренной командой Show
+                databases или утилитой mysqlshow.<br>
+                По умолчанию, root имеет доступ ко всем базам данных и таблицам. Перейти в созданную базу данных можно,
+                используя команду mysql <b>Use database</b>.
+                <pre class="prettyprint">
+Mysql/bin&gt;mysql -u root -p data1
+Enter password:******
+
+Welcome to MySQL monitor.</pre>
+                Или, находясь в другой базе данных, например в mysql ввести команду:
+
+                <pre class="prettyprint">
+mysql&gt;use data1
+
+Database changed.</pre>
+                Создать базу данных можно непосредственно находясь в клиентском приложении MySQL, вводом команды:
+                <pre class="prettyprint" lang-sql>CREATE DATABASE Base_name</pre>
+                Где Base_name имя создаваемой базы данных. В созданной базе можно создавать таблицы и вводить
+                информацию. Указанные операции можно выполнить, используя специализированное программное обеспечение,
+                например MySQL-Front, Mysql Workbench или SQLyog.
+                <p>Необходимо указать:</p>
+                <ul>
+                    <li>Имя;</li>
+                    <li>Хост;</li>
+                    <li>Пароль;</li>
+                    <li>Порт;</li>
+                    <li>Имя БД (при необходимости).</li>
+                </ul>
+
+
+                После задания активной БД можно с помощью средств, предоставляемых программой изменять структуру БД,
+                вводить данные, задавать ключевые поля. Помимо этого можно в специально отведенном окне напрямую вводить
+                инструкции, используя синтаксис языка SQL, как показано на рисунке:
+
+                4. Средствами языка SQL необходимо создать четыре таблицы в базе данных, используя команду
+                CREATE TABLE, синтаксис которой приведен в приложении. Для таблицы J:
+                <pre class="prettyprint" lang-sql>CREATE TABLE j (
+                Jnum varchar(6) NOT NULL default '',
+                Jnam varchar(20) default NULL,
+                Ci varchar(20) default NULL,
+                PRIMARY KEY  (Jnum)
+                ) TYPE=MyISAM;</pre>
+                Значками /* */ - выделяются комментарии в тексте запроса.<br>
+                При создании таблиц выполнить такую реализацию, чтобы она отражала структуру таблиц, указанную ниже
+                (таблице S, P, J, SPJ ) и должны быть наложены следующие ограничения:
+
+                <ul>
+                    <li>поля номер_поставщика, номер_детали, номер_изделия во всех таблицах имеет символьный тип и длину
+                        6 (varchar(6));
+                    </li>
+                    <li>поля рейтинг, вес и количество имеют целочисленный тип (integer);</li>
+                    <li>поля фамилия, город (поставщика, детали или изделия), название (детали или изделия) имеют
+                        символьный тип и длину 20 (varchar(20));
+                    </li>
+                    <li>ни для одного поля не предусматривается использование индексов;</li>
+                    <li>для всех полей допускаются значения NULL и значения-дубликаты, кроме полей первичного и внешнего
+                        ключей.
+                    </li>
+                </ul>
+                После создания пустых таблиц их необходимо наполнить данными. Вводить данные в нее можно несколькими
+                способами:<br>
+                <h3 id="manual">Вручную, используя команду insert into;</h3>
+                Пример ввода данных вручную (команда INSERT):
+
+                <pre class="prettyprint"
+                     lang-sql>insert into J (Jnum, Jnam, Ci)values ('J1','Жесткий диск','Париж');</pre>
+                или
+                <pre class="prettyprint" lang-sql>insert into J values ('J1','Жесткий диск','Париж');</pre>
+
+                //т.е в случае если вы вставляете данные во все поля таблицы то их перечислять не обязательно.<br>
+                Таким образом SQL инструкция имеет следующий вид<br>
+                <pre class="prettyprint"
+                     lang-sql>INSERT INTO table_name (id, name) VALUES ('id_value', 'name_value');</pre>
+                Записать и выполнить совокупность запросов для занесения нижеприведенных данных в созданные таблицы
+                <pre class="prettyprint" lang-sql>insert into имя_таблицы [(поле [,поле]...)] values (константа [,константа]...)</pre>
+                <h3 id="text">Загрузить данные из текстового файла</h3>
+                Это является более предпочтительным, особенно если нужно ввести
+                несколько тысяч записей.
+
+                <br><b>Синтаксис команды LOAD DATA INFILE.</b>
+
+                <pre class="prettyprint" lang-sql>DATA [LOW_PRIORITY] [LOCAL] INFILE 'file_name.txt' [REPLACE | IGNORE]
+                INTO TABLE tbl_name
+                [FIELDS
+                [TERMINATED BY 't']
+                [OPTIONALLY] ENCLOSED BY '']
+                [ESCAPED BY '' ]]
+                [LINES TERMINATED BY 'n']
+                [IGNORE number LINES]
+                [(col_name,...)]</pre>
+
+                Пример:
+
+                <pre class="prettyprint" lang-sql>LOAD DATA LOCAL INFILE '/MyDocs/categories.txt' REPLACE
+                INTO TABLE category FIELDS TERMINATED BY ';' OPTIONALLY ENCLOSED
+                BY '\"' LINES TERMINATED BY '\n'</pre>
+                В данном случае файл categories.txt находится на машине под управлением MS Windows, в каталоге
+                C:\MyDocs.
+
+                Обратите внимание на UNIX стиль написания пути. Слово
+                <ul>
+                    <li><b>REPLACE</b>
+                        В SQL запросе означает, что необходимо замещать записи с совпадающими значениями ключей.
+                    </li>
+                    <li><b>INTO TABLE</b>
+                        указывает имя таблицы, куда будут импортированы данные.
+                    </li>
+                    <li><b>FIELDS TERMINATED BY ';'</b>
+                        указывает разделители полей, порядок полей должен быть таким же, как и в таблице назначения,
+                    </li>
+                    <li><b>OPTIONALLY ENCLOSED BY '\"'</b>
+                        указывает, что поля VARCHAR взяты в двойные кавычки
+                    </li>
+                    <li><b>LINES TERMINATED BY '\r'</b>
+                        указывает разделители строк.
+                    </li>
+                </ul>
+                <h3 id="soft"> Программно</h3>
+                Можно использовать утилиту mysqlimport для загрузки данных из текстового файла, или использовать
+                программы MySQL-Front, Mysql Workbench или SQLyog.
+
+                <h3 id="data">Данные для создания базы</h3>
+                <pre>
+    Таблица поставщиков (S)
+Hомеp поставщика	Фамилия	Рейтинг	Город
+S1	Смит	20	Лондон
+S2	Джонс	10	Париж
+S3	Блейк	30	Париж
+S4	Кларк	20	Лондон
+S5	Адамс	30	Афины
+
+
+Таблица деталей (P)
+Номер детали	Название	Цвет	Вес	Город
+P1	Гайка	Красный	12	Лондон
+P2	Болт	Зеленый	17	Париж
+P3	Винт	Голубой	17	Рим
+P4	Винт	Красный	14	Лондон
+P5	Кулачок	Голубой	12	Париж
+P6	Блюм	Красный	19	Лондон
+
+
+Таблица изделий (J)
+Номер изделия	Название	Город
+J1	Жесткий диск	Париж
+J2	Перфоратор	Рим
+J3	Считыватель	Афины
+J4	Принтер	Афины
+J5	Флоппи-диск	Лондон
+J6	Терминал	Осло
+J7	Лента	Лондон
+
+
+Таблица поставок (SPJ)
+Номер поставщика	Номер детали	Номер изделия	Количество
+S1	P1	J1	200
+S1	P1	J4	700
+S2	P3	J1	400
+S2	P3	J2	200
+S2	P3	J3	200
+S2	P3	J4	500
+S2	P3	J5	600
+S2	P3	J6	400
+S2	P3	J7	800
+S2	P5	J2	100
+S3	P3	J1	200
+S3	P4	J2	500
+S4	P6	J3	300
+S4	P6	J7	300
+S5	P2	J2	200
+S5	P2	J4	100
+S5	P5	J5	500
+S5	P5	J7	100
+S5	P6	J2	200
+S5	P1	J4	100
+S5	P3	J4	200
+S5	P4	J4	800
+S5	P5	J4	400
+S5	P6	J4	500
+                </pre>
+
+
+            </div>
+        </div>
+    </section>
+</div>
+<script src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/prettify/prettify.js"></script>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&skin=sunburst"></script>
+<script src="js/layout.js"></script>
+</body>
+</html>
+
