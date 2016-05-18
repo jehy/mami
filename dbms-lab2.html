@@ -17,7 +17,8 @@
     <nav>
 
         <div class="pull-left">
-            <h1><a href="/"><img src="img/icon.png" alt="Free Documentation Template Icon" /> <span>Все материалы</span></a></h1>
+            <h1><a href="/"><img src="img/icon.png" alt="Free Documentation Template Icon"/> <span>Все материалы</span></a>
+            </h1>
         </div>
 
         <div class="pull-right">
@@ -94,7 +95,7 @@ mysql&gt;use data1
 
 Database changed.</pre>
                 Создать базу данных можно непосредственно находясь в клиентском приложении MySQL, вводом команды:
-                <pre class="prettyprint" lang-sql>CREATE DATABASE Base_name</pre>
+                <pre class="prettyprint lang-sql">CREATE DATABASE Base_name</pre>
                 Где Base_name имя создаваемой базы данных. В созданной базе можно создавать таблицы и вводить
                 информацию. Указанные операции можно выполнить, используя специализированное программное обеспечение,
                 например MySQL-Front, Mysql Workbench или SQLyog.
@@ -115,7 +116,7 @@ Database changed.</pre>
 
                 4. Средствами языка SQL необходимо создать четыре таблицы в базе данных, используя команду
                 CREATE TABLE, синтаксис которой приведен в приложении. Для таблицы J:
-                <pre class="prettyprint" lang-sql>CREATE TABLE j (
+                <pre class="prettyprint lang-sql">CREATE TABLE j (
                 Jnum varchar(6) NOT NULL default '',
                 Jnam varchar(20) default NULL,
                 Ci varchar(20) default NULL,
@@ -143,24 +144,22 @@ Database changed.</pre>
                 <h3 id="manual">Вручную, используя команду insert into;</h3>
                 Пример ввода данных вручную (команда INSERT):
 
-                <pre class="prettyprint"
-                     lang-sql>insert into J (Jnum, Jnam, Ci)values ('J1','Жесткий диск','Париж');</pre>
+                <pre class="prettyprint lang-sql">insert into J (Jnum, Jnam, Ci)values ('J1','Жесткий диск','Париж');</pre>
                 или
-                <pre class="prettyprint" lang-sql>insert into J values ('J1','Жесткий диск','Париж');</pre>
+                <pre class="prettyprint lang-sql">insert into J values ('J1','Жесткий диск','Париж');</pre>
 
                 //т.е в случае если вы вставляете данные во все поля таблицы то их перечислять не обязательно.<br>
                 Таким образом SQL инструкция имеет следующий вид<br>
-                <pre class="prettyprint"
-                     lang-sql>INSERT INTO table_name (id, name) VALUES ('id_value', 'name_value');</pre>
+                <pre class="prettyprint  lang-sql">INSERT INTO table_name (id, name) VALUES ('id_value', 'name_value');</pre>
                 Записать и выполнить совокупность запросов для занесения нижеприведенных данных в созданные таблицы
-                <pre class="prettyprint" lang-sql>insert into имя_таблицы [(поле [,поле]...)] values (константа [,константа]...)</pre>
+                <pre class="prettyprint lang-sql">insert into имя_таблицы [(поле [,поле]...)] values (константа [,константа]...)</pre>
                 <h3 id="text">Загрузить данные из текстового файла</h3>
                 Это является более предпочтительным, особенно если нужно ввести
                 несколько тысяч записей.
 
                 <br><b>Синтаксис команды LOAD DATA INFILE.</b>
 
-                <pre class="prettyprint" lang-sql>DATA [LOW_PRIORITY] [LOCAL] INFILE 'file_name.txt' [REPLACE | IGNORE]
+                <pre class="prettyprint lang-sql">DATA [LOW_PRIORITY] [LOCAL] INFILE 'file_name.txt' [REPLACE | IGNORE]
                 INTO TABLE tbl_name
                 [FIELDS
                 [TERMINATED BY 't']
@@ -172,7 +171,7 @@ Database changed.</pre>
 
                 Пример:
 
-                <pre class="prettyprint" lang-sql>LOAD DATA LOCAL INFILE '/MyDocs/categories.txt' REPLACE
+                <pre class="prettyprint lang-sql">LOAD DATA LOCAL INFILE '/MyDocs/categories.txt' REPLACE
                 INTO TABLE category FIELDS TERMINATED BY ';' OPTIONALLY ENCLOSED
                 BY '\"' LINES TERMINATED BY '\n'</pre>
                 В данном случае файл categories.txt находится на машине под управлением MS Windows, в каталоге
@@ -264,7 +263,7 @@ S5	P6	J4	500
 
                 <p>5. Выполнить модификацию структуры таблицы SPJ, добавив в SPJ поле с датой поставки. Убедиться в
                     успешности выполненных действий. При необходимости исправить ошибки (команда Alter table).</p>
-                <p>6. Уничтожить созданные таблицы, предварительно сохранив инструкции для восстановления структуры БД и
+                <p>6. Уничтожить созданные таблицы, предварительно <strong> сохранив инструкции</strong> для восстановления структуры БД и
                     информационного наполнения, используя средства работы СУБД. Убедиться в успешности выполненных
                     действий.</p>
                 <p>7. Выполнить необходимые действия, написав и выполнив соответствующие запросы для модификации таблиц,
@@ -275,7 +274,7 @@ S5	P6	J4	500
                 <img src="img/dbms-lab2/model.png">
 
                 <p>Проверить результат заполнения таблиц, написав и выполнив простейший запрос:</p>
-                <pre class="prettyprint" lang-sql>select * from имя_таблицы</pre>
+                <pre class="prettyprint lang-sql">select * from имя_таблицы</pre>
                 При наличии ошибок выполнить корректировку, исправив либо удалив ошибочные строки таблиц
 
                 <h3 id="questions">Контрольные вопросы</h3>
