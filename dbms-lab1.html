@@ -271,6 +271,9 @@
                     <li> mysqldump</li>
                     <li> isamchk</li>
                 </ul>
+                <p><strong>Внимание!</strong> Утилиты - это отдельные программы, которые находятся в папке bin, а не команды MySQL.
+                Для их запуска вам нужно выйти из консоли MySQL (если вы в ней), и использовать обычную консоль Windows.
+                Так же рекомендуется перед запуском утилит сменить текущую папку на ту, в которой у вас находится MySQL.</p>
                 <p>Утилиты mysqld и mysql были подробно рассмотрены ранее, поэтому возвращаться к ним не будем.
                     Кратко рассмотрим остальные.</p>
                 <h4>Mysqladmin</h4>
@@ -326,7 +329,7 @@
                     <li>-V, --version Вывести информацию о версии</li>
                 </ul>
                 Если ввести mysqlshow без аргументов, будут показаны все базы данных, если указать имя БД, будут
-                показаны все таблицы в ней.
+                показаны все таблицы в ней. Не забывайте так же указывать ваше имя пользователя и пароль, если он не пустой.
                 Команды
                 <pre class="prettyprint">mysqlshow</pre>
                 <pre class="prettyprint">mysqlshow mysql</pre>
@@ -401,7 +404,7 @@
 </div>
 <script src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/prettify/prettify.js"></script>
-<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&skin=sunburst"></script>
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=css&skin=sunburst"></script>
 <script src="js/layout.js"></script>
 </body>
 </html>

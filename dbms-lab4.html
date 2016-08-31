@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Лабораторная #4 по базам данных</title>
+    <link href="http://fonts.googleapis.com/css?family=Raleway:700,300" rel="stylesheet"
+          type="text/css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/prettify.css">
+</head>
+<body>
+<div class="wrapper">
+    <nav>
+
+        <div class="pull-left">
+            <h1><a href="/"><img src="img/icon.png" alt="Free Documentation Template Icon"/> <span>Все материалы</span></a>
+            </h1>
+        </div>
+
+        <div class="pull-right">
+
+        </div>
+
+    </nav>
+
+    <header>
+        <div class="container">
+            <h2 class="lone-header">Лабораторная #4 по базам данных</h2>
+        </div>
+    </header>
+    <section>
+        <div class="container">
+            <ul class="docs-nav">
+                <li><a href="#info" class="cc-active">Теоретические сведения</a></li>
+                <li><a href="#task" class="cc-active">Задание</a></li>
+                <li><a href="#sample" class="cc-active">Пример</a></li>
+                <li><a href="#questions" class="cc-active">Контрольные вопросы</a></li>
+                <li class="separator"></li>
+            </ul>
+            <div class="docs-content">
+                <h2>Лабораторная работа №4. Использование транзакций</h2>
+
+                <b>Цель работы:</b> Используя данные базы данных, подготовленной в предыдущей лабораторной работе,
+                подготовить и реализовать серию запросов, связанных с выборкой информации и модификацией данных таблиц.
+
+                <h3 id="info">Теоретические сведения</h3>
+
+
+                <p>Изменения БД часто требуют выполнения нескольких запросов, например при покупке в электронном
+                    магазине
+                    требуется добавить запись в таблицу заказов и уменьшить число товарных позиций на складе. В
+                    промышленных
+                    БД одно событие может затрагивать большее число таблиц и требовать многочисленных запросов.</p>
+
+                <p>Если на этапе выполнения одного из запросов происходит сбой, это может нарушить целостность БД (товар
+                    может быть продан, а число товарных позиций на складе не обновлено). Чтобы сохранить целостность БД,
+                    все
+                    изменения должны выполняться как единое целое. Либо все изменения успешно выполняются, либо, в
+                    случае
+                    сбоя, БД принимает состояние, которое было до начала изменений. Это обеспечивается средствами
+                    обработки
+                    транзакций.</p>
+
+                <p>Транзакция– последовательность операторов SQL, выполняющихся как единая операция, которая не
+                    прерывается
+                    другими клиентами. Пока происходит работа с записями таблицы (обновление или удаление), никто другой
+                    не
+                    может получить доступ к этим записям, т. к. MySQL автоматически блокирует доступ к ним.</p>
+
+                <p>Таблицы ISAM, MyISAM и HEAP не поддерживают транзакции. В настоящий момент их поддержка
+                    осуществляется
+                    только в таблицах BDB и InnoDB.</p>
+
+                <p>Транзакции позволяют объединять операторы в группу и гарантировать, что все операторы группы будут
+                    выполнены успешно. Если часть транзакции выполняется со сбоем, результаты выполнения всех операторов
+                    транзакции до места сбоя отменяются, приводя БД к виду, в котором она была до выполнения
+                    транзакции.</p>
+
+                <p>Следующие операторы неявно завершают транзакцию (как если бы перед их выполнением был выдан
+                    COMMIT):</p>
+                <ul>
+                    <li>ALTER TABLE</li>
+                    <li>DROP DATABASE</li>
+                    <li>LOAD MASTER DATA</li>
+                    <li>SET AUTO COMMIT=1</li>
+                    <li>BEGIN</li>
+                    <li>CREATE INDEX</li>
+                    <li>DROP TABLE</li>
+                    <li>RENAME TABLE</li>
+                    <li>TRUNCATE TABLE</li>
+                    <li>DROP INDEX</li>
+                    <li>LOCK TABLES</li>
+                    <li>START TRANSACTION</li>
+                </ul>
+                <p>UNLOCK TABLES также завершает транзакцию, если какие-либо таблицы были блокрованы. До MySQL 4.0.13
+                    CREATE TABLE завершал транзакцию, если была бы включена бинарная регистрация.
+                    Транзакции не могут быть вложенными. Это следствие того, что неявный COMMIT выполняется для любой
+                    текущей транзакции, когда выполняется оператор start TRANSACTION или его синонимы.
+                </p>
+                <p>По умолчанию MySQL работает в режиме автоматического завершения транзакций, т. е. как только
+                    выполняется
+                    оператор обновления данных, который модифицирует таблицу, изменения тут же сохраняются на диске.
+                    Чтобы
+                    объединить операторы в транзакцию, следует отключить этот режим: set AUTOCOMMIT=0;</p>
+
+                <p>После отключения режима для завершения транзакции необходимо ввести оператор COMMIT, для отката
+                    – ROLLBACK.</p>
+
+                <p>Отключить режим автоматического завершения транзакций для отдельной последовательности операторов
+                    можно
+                    оператором START TRANSACTION.</p>
+
+                <p>Для таблиц InnoDB есть операторы savepoint и rollback to savepoint, которые позволяют работать с
+                    именованными точками начала транзакции. Пример:</p>
+
+
+
+<pre class="prettyprint lang-sql">mysql> START TRANSACTION;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> INSERT INTO catalogs UALUES(NULL,'Периферия');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SAVEPOINT point1;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> INSERT INTO catalogs VALUES(NULL,'Разное');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT * FROM CATALOGS;
+
+cat_ID	cat_name
+1	Программирование
+2	Интернет
+3	азы данных
+4	Сети
+5	Мультимедиа
+12	Периферия
+13	Разное
+7 rows in set (0.00 sec)
+
+mysql> ROLLBACK TO SAVEPOINT point1;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> SELECT * FROM catalogs;
+cat_ID	cat_name
+1	Программирование
+2	Интернет
+3	Базы данных
+4	Сети
+5	Мультимедиа
+12	Периферия
+6 rows in set (0.00 sec)</pre>
+                В данном примере оператор savepoint устанавливает именованную точку начала транзакции с именем point1.
+                Оператор rollback
+                to
+                save point point1откатывает транзакцию к состоянию, в котором находилась БД на момент установки
+                именованной точки. Все точки сохранения транзакций удаляются, если выполняются
+                операторы commit или rollback без указания имени точки сохранения.
+
+                <h3 id="task">Задание</h3>
+                <ul>
+                    <li>
+                        Используя базу, полученную в лабораторной 2, создать транзакцию, произвести ее откат и фиксацию.
+                        Показать, что данные существовали до отката, удалились после отката,
+                        снова были добавлены, и затем были успешно зафиксированы.
+                    </li>
+                </ul>
+
+                <h3 id="sample">Пример выполнения работы</h3>
+
+                Для выполнения задания объединим несколько операций по добавлению в таблицу catalogs новых каталогов, а
+                затем произведем откат транзакции, т. е. отмену произведенных действий. Отключаем режим автоматического
+                завершения, добавляем новые записи и проверяем, добавились записи или нет.
+                <pre class="prettyprint lang-sql">mysql> SET AUTOCOMMIT=0;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> INSERT INTO catalogs VALUES(NULL,'Аппаратура' );
+Query OK, 1 row affected <0.06 sec)
+
+mysql> INSERT INTO catalogs VALUES(NULL,'Безопасность')
+Query OK, 1 row affected <0.00 sec)
+
+mysql> SELECT * FROM catalogs;
+
+cat_ID	cat_name
+1	Программирование
+2	Интернет
+3	Базы данных
+4	Сети
+5	Мультимедиа
+6	Аппаратура
+7	Безопасность
+7 rows in set (0.00 sec)</pre>
+
+                Откатываем транзакцию оператором ROLLBACK(изменения не сохранились).
+<pre class="prettyprint lang-sql">mysql> ROLLBACK;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> SELECT * FROM catalogs;
+cat_ID	cat_nane
+1	Программирование
+2	Интернет
+3	Базы данных
+4	Сети
+5	Мультимедиа
+5 rows in set (0.00 sec)</pre>
+
+                Воспроизведем транзакцию и сохраним действия оператором COMMIT.
+                <pre class="prettyprint lang-sql">
+mysql> INSERT INTO catalogs VALUES(NULL,'Аппаратура' );
+Query OK, 1 row affected (0.06 sec)
+
+mysql> INSERT INTO catalogs VALUES(NULL,'Безопасность')
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT * FROM catalogs;
+cat_ID	cat_nane
+1	Программирование
+2	Интернет
+3	Базы данных
+4	Сети
+5	Мультимедиа
+8	Аппаратура
+9	Безопасность
+7 rows in set (0.00 sec)
+
+mysql> COMMIT;
+Query OK, 0 row affected (0.00 sec)
+
+mysql> SELECT * FROM catalogs;
+cat_ID	cat_nane
+1	Программирование
+2	Интернет
+3	Базы данных
+4	Сети
+5	Мультимедиа
+8	Аппаратура
+9	Безопасность
+7 rows in set (0.00 sec)</pre>
+
+                <h3 id="questions">Контрольные вопросы</h3>
+                <ol>
+                    <li>Что такое транзакция?</li>
+                    <li>Какие запросы допустимы внутри тразакции?</li>
+                    <li>К чему приведёт использование DDL запроса внутри транзакции?</li>
+                </ol>
+
+            </div>
+        </div>
+    </section>
+</div>
+<script src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/prettify/prettify.js"></script>
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=css&skin=sunburst"></script>
+<script src="js/layout.js"></script>
+</body>
+</html>
+
