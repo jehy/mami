@@ -168,7 +168,33 @@ fclose($socket);
 echo $s;
 ?&gt;
 </pre>
+                <p>Естественно, можно использовать любые другие средства для генерации и отправки HTTP запросов -
+                    браузеры, плагины для браузеров, снифферы, консольные утилиты (например, curl), или даже сделать это
+                    на bash:</p>
+<pre class="prettyprint lang-bash">
+exec 3<> /dev/tcp/example.com/80
 
+DATA='{"email": "foo@example.com"}'
+LEN=$(printf "$DATA" | wc -c)
+
+cat >&3 << EOF
+POST /api/retrieveInfo HTTP/1.1
+Host: example.com
+User-Agent: Bash
+Accept: */*
+Content-Type:application/json
+Content-Length: $LEN
+Connection: close
+
+$DATA
+EOF
+
+# Read response.
+while read line <&3; do
+   echo $line
+done
+
+</pre>
                 <h3 id="task">Задание</h3>
                 <p><strong>Внимание! Примеры создаются и эксплуатируются только на ваших тестовых проектах.
                     Запрещается
