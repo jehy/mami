@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Лабораторная #5 по Информационной безопасности</title>
+    <link href="http://fonts.googleapis.com/css?family=Raleway:700,300" rel="stylesheet"
+          type="text/css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/prettify.css">
+</head>
+<body>
+<div class="wrapper">
+    <nav>
+
+        <div class="pull-left">
+            <h1><a href="/"><img src="img/icon.png" alt="Free Documentation Template Icon"/> <span>Все материалы</span></a>
+            </h1>
+        </div>
+
+        <div class="pull-right">
+
+        </div>
+
+    </nav>
+    <header>
+        <div class="container">
+            <h2 class="lone-header">Лабораторная #5 по информационной безопасности</h2>
+        </div>
+    </header>
+    <section>
+        <div class="container">
+            <ul class="docs-nav">
+                <li><a href="#intro" class="cc-active">Введение</a></li>
+                <li><a href="#task" class="cc-active">Задание</a></li>
+                <li><a href="#questions" class="cc-active">Вопросы</a></li>
+                <li class="separator"></li>
+            </ul>
+            <div class="docs-content">
+                <h2>Лабораторная работа №5. Разбор и генерация HTTP запроса</h2>
+
+                <b>Цель работы:</b> Разобрать основные поля HTTP запроса, средства перехвата и отправки подделанного
+                запроса.
+
+
+                <h3 id="intro">Введение</h3>
+
+                <p>HTTP расшифровывается как HyperText Transfer Protocol (протокол передачи гипертекста). Протокол — это
+                    набор правил, по которым разные устройства обмениваются данными. Всё, что вы видите в данном окне
+                    браузера,
+                    было получено посредством этого протокола.
+                </p>
+                <p>
+                    Взглянем на схему общения двух устройств. Пусть этими устройствами будут ваш компьютер и
+                    какой-нибудь сервер в интернете:
+
+                    Сначала, браузер отсылает http-запрос. Он может выглядеть примерно так:
+<pre class="prettyprint lang-html">
+GET /other-19 HTTP/1.1
+Host: www.scriptsite.ru
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.0; ru; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5
+(.NET CLR 3.5.30729)
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: ru,en-us;q=0.7,en;q=0.3
+Accept-Encoding: gzip,deflate
+Accept-Charset: windows-1251,utf-8;q=0.7,*;q=0.7
+Keep-Alive: 300
+Connection: keep-alive
+                </pre>
+                <p>
+                    При этом первая строка является строкой запроса, а все остальные строки — это http-заголовки,
+                    несущие в себе дополнительную информацию о запросе, о клиенте, который эту информацию запрашивает, и
+                    о
+                    многих других вещах.</p>
+                <p>В ответ на наш запрос сервер может отослать, например, такой ответ:</p>
+<pre class="prettyprint lang-html">
+HTTP/1.x 200 OK
+Date: Sat, 12 Dec 2009 15:41:52 GMT
+Server: Apache/2.0.61 (Unix) mod_ssl/2.0.61 OpenSSL/0.9.8k mod_dp20/0.99.2 PHP/5.2.5
+mod_python/3.3.1 Python/2.5.1 mod_ruby/1.2.6 Ruby/1.8.6(2007-09-24)
+X-Powered-By: PHP/5.2.5
+Set-Cookie: PHPSESSID=ft47gokfee6amv3eda3k1p93s3; path=/
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+Pragma: no-cache
+Keep-Alive: timeout=10, max=1024
+Connection: Keep-Alive
+Transfer-Encoding: chunked
+Content-Type: text/html
+    </pre>
+                <p>
+                    Первая строка — строка статуса. Остальные строки это заголовки.</p>
+
+                <p>Для того, чтобы увидеть http-заголовки, обычно достаточно воспользоваться встроенными в
+                    браузер инстурментами разработчика. Если же хочется максимально удобной отладки, то лучше
+                    воспользоваться HTTP сниффером - например, Fiddler.
+                </p>
+                <p>Приводить полный список заголовков смысла нет -
+                    из названия
+                    довольно информативны, и всегда можно посмотреть их <a
+                            href="https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D0%B7%D0%B0%D0%B3%D0%BE%D0%BB%D0%BE%D0%B2%D0%BA%D0%BE%D0%B2_HTTP">в
+                        той же википедии</a>.</p>
+                <p>Давайте представим, что нам надо получить страницу с сайта, передав Cookie, и более того, нам
+                    известно, что
+                    на данную страницу пускают только после того, как Вы побывали на главной странице сайта.</p>
+
+
+                <p>Напишем наш запрос.</p>
+<pre class="prettyprint lang-html">
+GET http://www.site.ru/news.html HTTP/1.0\r\n
+Host: www.site.ru\r\n
+Referer: http://www.site.ru/index.html\r\n
+Cookie: income=1\r\n
+\r\n
+</pre>
+                <p>Данный запрос говорит нам о том, что мы хотим получить содержимое страницы по адресу
+                    http://www.site.ru/news.html, использую метод GET. Поле Host говорит о том, что данная страница
+                    находится на сервере www.site.ru, поле Referer говорит о том, что за новостями мы пришли с главной
+                    страницы сайта, а поле Cookie говорит о том, что нам была присвоено некое значение куки в переменной
+                    income равное 1. Почему так важны поля
+                    Host, Referer и Сookie? Потому что очень часто программисты при создании динамических сайтов
+                    проверяют
+                    данные поля, которые появляются в скриптах в виде переменных - для того, чтобы сайт не могли
+                    автоматически скачать,
+                    чтобы попасть на внутренние страницы можно было с главной, и так далее.</p>
+
+                <p>Теперь давайте представим, что нам надо заполнить поля формы на странице и отправить запрос из формы.
+                    Пусть в данной форме будет два поля: login и password, и мы знаем логин и пароль.</p>
+
+<pre class="prettyprint lang-html">
+GET http://www.site.ru/news.html?login=Petya%20Vasechkin&password=qq HTTP/1.0\r\n
+Host: www.site.ru\r\n
+Referer: http://www.site.ru/index.html\r\n
+Cookie: income=1\r\n
+\r\n
+</pre>
+                <p>Логин у нас "Petya Vasechkin". Почему же мы должны писать "Petya%20Vasechkin"? Это из-за того, что
+                    специальные символы могут быть распознаны сервером, как признаки наличия нового параметра, конца
+                    запроса и так далее. Поэтому существует алгоритм кодирования имен параметров и их значений, во
+                    избежание
+                    ошибочных ситуаций в запросе. В PHP для данной цели есть функции
+                    rawurlencode и rawurldecode для кодирования и декодирования соответственно. Следует отметить, что,
+                    если
+                    в запросе были переданы закодированные параметры, то декодирование РНР делает сам.
+                </p>
+
+                <p>Теперь мы знаем, что должно быть в теле HTTP запроса. Однако, как его отправить? В случае, если мы
+                    работаем с PHP, можно воспользоваться встроенными функциями для работы с сокетами. Пример ниже
+                    иллюстрирует отправку формы методом POST
+                    и вывод результатов:</p>
+<pre class="prettyprint lang-php">&lt;?
+$xml='Test';
+$posts='xml='.$xml;
+$query="POST /test.php HTTP/1.0\r\n".
+    "Accept: text/html, application/xml;q=0.9, application/xhtml+xml\r\n".
+    "Accept-Charset: utf-8\r\n".
+    "Content-Type: application/x-www-form-urlencoded\r\n".
+    "Content-Length: ".strlen($posts)."\r\n\r\n".$posts."\r\n\r\n";
+$socket=fsockopen('localhost',80,$errno,$errstr,60);
+fwrite($socket,$query);
+while(!feof($socket)){
+    $s.=fgets($socket);
+}
+fclose($socket);
+echo $s;
+?&gt;
+</pre>
+
+                <h3 id="task">Задание</h3>
+                <p><strong>Внимание! Примеры создаются и эксплуатируются только на ваших тестовых проектах.
+                    Запрещается
+                    их демонстрация на каких либо внешних сайтах.</strong></p>
+                <ul>
+                    <li>Написать серверную часть, реализующую авторизацию по логину и паролю, и защищающую некие данные
+                        при помощи access token, который записывается в cookie
+                    </li>
+                    <li>Реализовать "перехват" токена при помощи сниффера</li>
+                    <li>Сгенерировать средствами языка разработки (например, PHP) и отправить запрос на получение
+                        защищённой информации, продемонстрировать корректный ответ.
+                    </li>
+                </ul>
+                Дополнительные материалы:
+                <ul>
+                    <li>ещё немного <a href="http://www.codenet.ru/webmast/php/HTTP-POST.php">теории</a>;</li>
+                    <li><a href="http://www.php.su/articles/?cat=protocols&page=002">Объяснение</a> нескольких примеров
+                        заголовков;
+                    </li>
+                    <li>Хороший <a href="https://www.christophh.net/2012/07/24/php-socket-programming/">пример</a>
+                        правильной работы с сокетами в PHP;
+                    </li>
+                </ul>
+                <h3 id="questions">Контрольные вопросы:</h3>
+
+                <ol>
+                    <li>Какие бывают методы в HTTP запросе?</li>
+                    <li>Назовите примеры заголовков HTTP запроса.</li>
+                    <li>Какие заголовки явлются обязательными для HTTP запроса?</li>
+                    <li>Как должны быть настроены заголовки сервера?</li>
+                </ol>
+
+            </div>
+        </div>
+    </section>
+</div>
+<script src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/prettify/prettify.js"></script>
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=css&skin=sunburst"></script>
+<script src="js/layout.js"></script>
+</body>
+</html>
+
