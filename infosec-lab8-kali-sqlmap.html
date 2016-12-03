@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Установка Kali Linux</title>
+    <link href="http://fonts.googleapis.com/css?family=Raleway:700,300" rel="stylesheet"
+          type="text/css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/prettify.css">
+</head>
+<body>
+<div class="wrapper">
+    <nav>
+
+        <div class="pull-left">
+            <h1><a href="/mami"><img src="img/icon.png" alt="Free Documentation Template Icon"/>
+                <span>Все материалы</span></a>
+            </h1>
+        </div>
+
+        <div class="pull-right">
+
+        </div>
+
+    </nav>
+    <header>
+        <div class="container">
+            <h2 class="lone-header">SQLMap</h2>
+        </div>
+    </header>
+    <section>
+        <div class="container">
+            <div class="docs-content">
+                <h2>SQLMap</h2>
+
+
+                <p>
+                    sqlmap &mdash; это инструмент с открытым исходным кодом для тестирования на проникновение, который
+                    автоматизирует процесс выявления и эксплуатирования уязвимостей SQL-инъекций и захват серверов баз
+                    данных. Он поставляется с мощным движком выявления и многими нишевыми функциями для конечного
+                    тестера на проникновение и широким набором переключателей начиная от отпечатков баз данных по
+                    данным, полученным от этой БД, до доступа к файловой системе и выполнения команда на операционной
+                    системе посредством внеполосных подключений.
+                </p>
+                <p>
+                    Особенности
+                </p>
+                <ul>
+                    <li>
+                        Полная поддержка для таких систем управления базами данных как MySQL, Oracle, PostgreSQL,
+                        Microsoft SQL Server, Microsoft Access, IBM DB2, SQLite, Firebird, Sybase, SAP MaxDB и HSQLDB.
+                    </li>
+                    <li>
+                        Полная поддержка шести техник SQL-инхекций: слепая логическая (boolean-based blind), слепая,
+                        основанная на времени (time-based blind), основанная на ошибке (error-based), основанная на
+                        запросе UNION (UNION query-based), многоярусные запросы (stacked queries) и внеполосная
+                        (out-of-band).
+                    </li>
+                    <li>
+                        Поддержка прямого подключения к базе данных без прохода через SQL инъекцию, посредством введения
+                        учётных данных СУБД, IP адреса, порта и имени БД.
+                    </li>
+                    <li>
+                        Поддержка перечисления пользователей, хешей паролей, привилегий, ролей, БД, таблиц и колонок.
+                    </li>
+                    <li>
+                        Автоматическое распознавание форматов хешей паролей и предложение их взлома с использованием
+                        атаки по словарю.
+                    </li>
+                    <li>
+                        Поддержка сдампливания записей таблиц БД, диапазона записей или указанных колонок по
+                        пользовательскому выбору.
+                    </li>
+                    <li>
+                        Пользователь также может выбрать сдампливать только диапазон символов из каждой записи колонки.
+                    </li>
+                    <li>
+                        Поддержка поиска указанных имён БД, указанных таблиц по всем БД или указанным колонкам по всем
+                        таблицам БД. Это полезно, например, для идентификации таблиц, содержащих пользовательские
+                        учётные данные приложений, где колонки с соответствующими именами колонок содержат такие строки
+                        как имя и пароль.
+                    </li>
+                    <li>
+                        Поддержка загрузки и выгрузки любого файла из файловой системы с сервера БД, когда ПО БД MySQL,
+                        PostgreSQL или Microsoft SQL Server.
+                    </li>
+                    <li>
+                        Поддержка выполнения произвольных команд на ОС сервера БД и получение их стандартного вывода
+                        когда ПО MySQL, PostgreSQL или Microsoft SQL Server.
+                    </li>
+                    <li>
+                        Поддержка установления внедиапазонного TCP подключения между атакующей машиной и лежащей в
+                        основе сервера базы данных операционной системой. Этот канал по выбору пользователя может быть
+                        интерактивным приглашением командной строки, сессией Meterpreter или сессией графического
+                        пользовательского интерфейса (VNC).
+                    </li>
+                    <li>
+                        Поддержка повышения пользовательских привилегий процесса базы данных через команду Metasploit&#39;а
+                        - Meterpreter getsystem.
+                    </li>
+                </ul>
+
+                <b>
+                    Примеры запуска sqlmap<br/>
+                </b>
+                <p>
+                    Перечислить базы данных <em><strong>(--dbs)</strong></em> для сайта
+                    http://www.sqldummywebsite.name/rubrika.php?id=31 <em><strong>(-u
+                    http://www.sqldummywebsite.name/rubrika.php?id=31)</strong></em>
+                </p>
+                <pre class="prettyprint lang-bash">
+sqlmap -u http://www.sqldummywebsite.name/rubrika.php?id=31 --dbs</pre>
+                <p>
+                    Построить список таблиц <em><strong>(--tables)</strong></em> для базы данных laminat <em><strong>(-D
+                    laminat)</strong></em> для сайта http://www.sqldummywebsite.name/rubrika.php?id=31 <strong>(-u
+                    http://www.sqldummywebsite.name/rubrika.php?id=31)</strong>
+                </p>
+                <pre class="prettyprint lang-bash">
+sqlmap -u www.sqldummywebsite.name/rubrika.php?id=31 -D laminat --tables</pre>
+            </div>
+        </div>
+    </section>
+</div>
+<script src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/prettify/prettify.js"></script>
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=css&skin=sunburst"></script>
+<script src="js/layout.js"></script>
+</body>
+</html>
+

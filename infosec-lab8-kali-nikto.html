@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Nikto</title>
+    <link href="http://fonts.googleapis.com/css?family=Raleway:700,300" rel="stylesheet"
+          type="text/css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/prettify.css">
+</head>
+<body>
+<div class="wrapper">
+    <nav>
+
+        <div class="pull-left">
+            <h1><a href="/mami"><img src="img/icon.png" alt="Free Documentation Template Icon"/>
+                <span>Все материалы</span></a>
+            </h1>
+        </div>
+
+        <div class="pull-right">
+
+        </div>
+
+    </nav>
+    <header>
+        <div class="container">
+            <h2 class="lone-header">Nikto</h2>
+        </div>
+    </header>
+    <section>
+        <div class="container">
+            <div class="docs-content">
+                <h2>Nikto</h2>
+
+                Nikto это open source сканер веб серверов. Он сканирует:
+                <ul>
+                    <li>Более 6500 опасных скриптов CGI</li>
+                    <li>Более 1250 просроченных версий серверного ПО</li>
+                    <li>Известные проблемы более чем для 270 серверов</li>
+                    <li>Наличие индексных файлов</li>
+                    <li>Опции HTTP-сервера такие как TRACE</li>
+                    <li>Установленное ПО на веб сервере</li>
+                </ul>
+                Плюсом идёт простота использования утилиты - достаточно просто написать
+                <pre class="prettyprint lang-bash">nikto -h someWebSite.RU</pre>
+                Стоит заметить, что Nikto спроектирован не как "скрытное" ПО, этот сканер работает быстро, но
+                как только начнется сканирование сервера, его системные администраторы заметят массу записей в
+                логах. Или сканирование заметят сервисы вроде fail2ban.
+            </div>
+        </div>
+    </section>
+</div>
+<script src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/prettify/prettify.js"></script>
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=css&skin=sunburst"></script>
+<script src="js/layout.js"></script>
+</body>
+</html>
+
