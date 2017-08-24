@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/jehy/mami#readme",
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "code-prettify": "^0.1.0",
     "jquery": "^3.2.1"
   },

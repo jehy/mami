@@ -2,52 +2,67 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="description" content="">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="MobileOptimized" content="320">
-    <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Лабораторная #1 по Информационной безопасности</title>
-    <link href="http://fonts.googleapis.com/css?family=Raleway:700,300" rel="stylesheet"
-          type="text/css">
     <link rel="stylesheet" href="dist/styles.css">
+    <meta content="width=device-width,initial-scale=1" name=viewport>
 </head>
 <body>
-<div class="wrapper">
-    <nav>
-
-        <div class="pull-left">
-            <h1><a href="./"><img src="img/icon.png" alt="Free Documentation Template Icon"/> <span>Все материалы</span></a>
-            </h1>
+<!-- Top Navbar -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle"
+                    data-toggle="collapse"
+                    data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+                Лабораторная #1 по информационной безопасности
+            </a>
         </div>
-
-        <div class="pull-right">
-
-        </div>
-
-    </nav>
-    <header>
-        <div class="container">
-            <h2 class="lone-header">Лабораторная #1 по информационной безопасности</h2>
-        </div>
-    </header>
-    <section>
-        <div class="container">
-            <ul class="docs-nav">
-                <li><a href="#intro" class="cc-active">Определение</a></li>
-                <li><a href="#how" class="cc-active">Принцип</a></li>
-                <li><a href="#types" class="cc-active">Типы инъекций</a></li>
-                <li><a href="#fix" class="cc-active">Исправление</a></li>
-                <li><a href="#task" class="cc-active">Задание</a></li>
-                <li><a href="#questions" class="cc-active">Вопросы</a></li>
-                <li class="separator"></li>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="./">Все материалы</a></li>
+                <!--<li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>-->
             </ul>
-            <div class="docs-content">
-                <h2>Лабораторная работа №1. SQL инъекции</h2>
+        </div>
+    </div>
+</div>
+<div class="row" id="content">
+    <!--Nav Bar -->
+    <nav class="col-xs-3 bs-docs-sidebar">
+        <ul id="sidebar" class="nav nav-stacked fixed">
+            <li>
+                <a href="#intro">Вводная</a>
+                <ul class="nav nav-stacked">
+                    <li><a href="#introGoal">Цель работы</a></li>
+                    <li><a href="#introWhat">Определение</a></li>
+                    <li><a href="#introHow">Принцип</a></li>
+                    <li><a href="#introTypes">Типы инъекций</a></li>
+                    <li><a href="#introFix">Исправление</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#task">Задание</a>
+            </li>
+            <li>
+                <a href="#questions">Вопросы</a>
+            </li>
+        </ul>
+    </nav>
+    <!--Main Content -->
+    <div class="col-xs-9">
+        <section id="intro" class="group">
+            <h3>Вводная</h3>
+            <div id="introGoal" class="subgroup">
+                <h4>Цель работы</h4>
+                Ознакомиться с принципами использования и защиты от SQL инъекций.
+            </div>
+            <div id="introWhat" class="subgroup">
+                <h4>Определение</h4>
 
-                <b>Цель работы:</b> Ознакомиться с принципами использования и защиты от SQL инъекций.
-
-
-                <h3 id="intro">Введение</h3>
                 <p>Внедрение SQL-кода (англ. SQL injection) — один из распространённых способов взлома сайтов и
                     программ, работающих с базами данных, основанный на внедрении в запрос произвольного SQL-кода.
 
@@ -61,9 +76,9 @@
 
                     Разработчик прикладных программ, работающих с базами данных, должен знать о таких уязвимостях и
                     принимать меры противодействия внедрению SQL.</p>
-                <h4>Установка на личном компьютере</h4>
-
-                <h3 id="how">Принцип атаки внедрения SQL</h3>
+            </div>
+            <div id="introHow" class="subgroup">
+                <h4>Принцип </h4>
                 <p>
                     Допустим, серверное ПО, получив входной параметр id, использует его для создания SQL-запроса.
                     Рассмотрим следующий PHP-скрипт:</p>
@@ -89,9 +104,11 @@ SELECT * FROM news WHERE id_news = -1 OR 1=1
                     идентификатором
                     будут выбраны все имеющиеся в базе новости, поскольку выражение 1=1 всегда истинно — вычисления
                     происходят по кратчайшему контуру в схеме).</p>
-                <h3 id="types">Основные типы SQL injections</h3>
+            </div>
+            <div id="introTypes" class="subgroup">
+                <h4>Типы инъекций </h4>
 
-                <h4>1. Внедрение в строковые параметры</h4>
+                <h5>1. Внедрение в строковые параметры</h5>
 
                 Предположим, серверное ПО, получив запрос на поиск данных в новостях параметром search_text, использует
                 его в следующем SQL-запросе (здесь параметры экранируются кавычками):
@@ -113,7 +130,7 @@ WHERE news_caption LIKE('%Test%')
 SELECT id_news, news_date, news_caption, news_text, news_id_author FROM news
 WHERE news_caption LIKE('%') and (news_id_author='1%')
 </pre>
-                <h4>2. Использование UNION</h4>
+                <h5>2. Использование UNION</h5>
 
                 Язык SQL позволяет объединять результаты нескольких запросов при помощи оператора UNION. Это
                 предоставляет злоумышленнику возможность получить несанкционированный доступ к данным.
@@ -131,7 +148,7 @@ SELECT id_news, header, body, author FROM news WHERE id_news = -1 UNION SELECT 1
                 Так как новости с идентификатором −1 заведомо не существует, из таблицы news не будет выбрано ни одной
                 записи, однако в результат попадут записи, несанкционированно отобранные из таблицы admin в результате
                 инъекции SQL.
-                <h4>3. Использование UNION + group_concat()</h4>
+                <h5>3. Использование UNION + group_concat()</h5>
 
                 В некоторых случаях хакер может провести атаку, но не может видеть более одной колонки. В случае MySQL
                 взломщик может воспользоваться функцией:
@@ -143,7 +160,7 @@ group_concat(col, symbol, col)
                 <pre class="prettyprint lang-sql">
 -1 UNION SELECT group_concat(username, 0x3a, password) FROM admin
 </pre>
-                <h4>4. Экранирование хвоста запроса</h4>
+                <h5>4. Экранирование хвоста запроса</h5>
 
                 Зачастую, SQL-запрос, подверженный данной уязвимости, имеет структуру, усложняющую или препятствующую
                 использованию union. Например скрипт
@@ -162,7 +179,7 @@ $res = mysql_query("SELECT author FROM news WHERE id=" . $_REQUEST['id'] ." AND 
 SELECT author FROM news WHERE id=-1 UNION SELECT password FROM admin/* AND author LIKE ('a%')
 </pre>
                 в котором часть запроса ( AND author LIKE ('a%')) помечена как комментарий и не влияет на выполнение.
-                <h4>5. Расщепление SQL-запроса</h4>
+                <h5>5. Расщепление SQL-запроса</h5>
 
                 Для разделения команд в языке SQL используется символ ; (точка с запятой), внедряя этот символ в запрос,
                 злоумышленник получает возможность выполнить несколько команд в одном запросе, однако не все диалекты
@@ -183,53 +200,59 @@ SELECT * FROM news WHERE id_news = 12;
 INSERT INTO admin (username, password) VALUES ('HaCkEr', 'foo');
 </pre>
                 и в таблицу admin будет несанкционированно добавлена запись HaCkEr.
+            </div>
+            <div id="introFix" class="subgroup">
+                <h4>Исправление </h4>
 
-
-                <h3 id="fix">Исправление</h3>
                 Существует большие количество рекомендаций по фильтрации входных данных, и даже по бану пользователей в
                 случае ввода системных функций MySQL. Однако единственным корректным исправлением данной уязвимости
                 является использование параметризированных запросов ("байндинг" переменных). В случае со связкой
                 PHP/MySQL это делается при помощи MySQLi или PDO.
-                <h3 id="task">Задание</h3>
-                <ul>
-                    <li>Определите свой Вариант 1 и Вариант 2 путём определения целочисленного остатка деления ASCII
-                        кода 1 и 2 буквы
-                        фамилии (в верхнем регистре) на 5 и 4 соответственно. Например, если ваша фамилия Иванов, то
-                        вариант
-                        1 вы можете получить запросом
-                        <pre class="prettyprint lang-sql">
+            </div>
+        </section>
+        <section id="task" class="group">
+            <h3>Задание</h3>
+            <ol>
+                <li>Определите свой Вариант 1 и Вариант 2 путём определения целочисленного остатка деления ASCII
+                    кода 1 и 2 буквы
+                    фамилии (в верхнем регистре) на 5 и 4 соответственно. Например, если ваша фамилия Иванов, то
+                    вариант
+                    1 вы можете получить запросом
+                    <pre class="prettyprint lang-sql">
 SELECT MOD(ORD("И"),5)+1
 </pre>
-                        А вариант 2 - запросом
-                        <pre class="prettyprint lang-sql">
+                    А вариант 2 - запросом
+                    <pre class="prettyprint lang-sql">
     SELECT MOD(ORD("В"),4)+1
 </pre>
-                    </li>
-                    <li>Реализуйте демонстрацию SQL injection типа "вариант 1" при помощи передачи типа переменной
-                        "вариант 2".
-                        <ol>
-                            <li>Данными, передаваемыми через методы POST и GET;</li>
-                            <li>Значениями Cookie;</li>
-                            <li>HTTP_REFERER;</li>
-                            <li>AUTH_USER и AUTH_PASSWORD (при использовании <a
-                                    href="http://php.net/manual/ru/features.http-auth.php">аутентификации</a>);
-                            </li>
-                        </ol>
-                    </li>
-                    <li>Реализуйте корректное исправление данной уязвимости</li>
-                </ul>
-                <h3 id="questions">Контрольные вопросы:</h3>
+                </li>
+                <li>Реализуйте демонстрацию SQL injection типа "вариант 1" при помощи передачи типа переменной
+                    "вариант 2".
+                    <ol>
+                        <li>Данными, передаваемыми через методы POST и GET;</li>
+                        <li>Значениями Cookie;</li>
+                        <li>HTTP_REFERER;</li>
+                        <li>AUTH_USER и AUTH_PASSWORD (при использовании <a
+                                href="http://php.net/manual/ru/features.http-auth.php">аутентификации</a>);
+                        </li>
+                    </ol>
+                </li>
+                <li>Реализуйте корректное исправление данной уязвимости</li>
+            </ol>
+        </section>
+        <section id="questions" class="group">
+            <h3>Вопросы</h3>
 
-                <ol>
-                    <li>Назовите основные типы SQL injection;</li>
-                    <li>Укажите возмжные пути устранения SQL injection;</li>
-                    <li>К чему может привести SQL injection? Наиболее пессимистичные варианты.</li>
-                </ol>
-
-            </div>
-        </div>
-    </section>
+            <ol>
+                <li>Назовите основные типы SQL injection;</li>
+                <li>Укажите возмжные пути устранения SQL injection;</li>
+                <li>К чему может привести SQL injection? Наиболее пессимистичные варианты.</li>
+            </ol>
+        </section>
+    </div>
 </div>
+
+
 <script src="dist/bundle.js"></script>
 </body>
 </html>
