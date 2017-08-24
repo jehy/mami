@@ -127,7 +127,7 @@ pre.prettyprint {
   font-size: 12px;
   line-height: 1.5;
   border: 1px solid #cccccc;
-  padding: 0;
+  padding: 4px!important;
 }
 
 /* Specify class=linenums on a pre to get line numbering */
