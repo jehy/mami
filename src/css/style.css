@@ -85,6 +85,17 @@ section {
     margin-top: 40px;
 }
 
-h4, .h4 {
-    margin-top: 30px;
+h1 {
+    font-size: 28px;
+}
+
+h2 {
+    font-size: 22px;
+}
+
+h3 {
+    font-size: 18px;
+}
+h4 {
+    font-size: 16px;
 }
