@@ -2,61 +2,77 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="description" content="">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="MobileOptimized" content="320">
-    <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Лабораторная #1 по базам данных</title>
-    <link href="http://fonts.googleapis.com/css?family=Raleway:700,300" rel="stylesheet"
-          type="text/css">
     <link rel="stylesheet" href="dist/styles.css">
+    <title>Лабораторная #1 по базам данных</title>
+    <meta content="width=device-width,initial-scale=1" name=viewport>
 </head>
 <body>
-<div class="wrapper">
-    <nav>
-
-        <div class="pull-left">
-            <h1><a href="./"><img src="img/icon.png" alt="Free Documentation Template Icon" /> <span>Все материалы</span></a></h1>
+<!-- Top Navbar -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle"
+                    data-toggle="collapse"
+                    data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+                Лабораторная #1 по базам данных
+            </a>
         </div>
-
-        <div class="pull-right">
-
-        </div>
-
-    </nav>
-    <header>
-        <div class="container">
-            <h2 class="lone-header">Лабораторная #1 по базам данных</h2>
-        </div>
-    </header>
-    <section>
-        <div class="container">
-            <ul class="docs-nav">
-                <li><a href="#install" class="cc-active">Установка MySQL</a></li>
-                <li><a href="#launch" class="cc-active">Запуск MySQL</a></li>
-                <li><a href="#privs" class="cc-active">Привилегии в MySQL</a></li>
-                <li><a href="#create" class="cc-active">Создание пользователя в MySQL</a></li>
-                <li><a href="#set_privs" class="cc-active">Назначение привилегий</a></li>
-                <li><a href="#utils" class="cc-active">Утилиты</a></li>
-                <li><a href="#task" class="cc-active">Задание</a></li>
-                <li><a href="#questions" class="cc-active">Вопросы</a></li>
-                <li class="separator"></li>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="./">Все материалы</a></li>
+                <!--<li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>-->
             </ul>
-            <div class="docs-content">
-                <h2>Лабораторная работа №1. Интерфейс СУБД MySQL. Предоставление доступа и привилегий. Утилиты, входящие
-                    в состав СУБД</h2>
-
-                <b>Цель работы:</b> Ознакомиться с приложениями, включенными в состав СУБД MySQL. Получить навыки
+        </div>
+    </div>
+</div>
+<div class="row" id="content">
+    <!--Nav Bar -->
+    <nav class="col-xs-3 bs-docs-sidebar">
+        <ul id="sidebar" class="nav nav-stacked fixed">
+            <li>
+                <a href="#intro">Вводная</a>
+                <ul class="nav nav-stacked">
+                    <li><a href="#introGoal">Цель работы</a></li>
+                    <li><a href="#install">Установка MySQL</a></li>
+                    <li><a href="#launch">Запуск MySQL</a></li>
+                    <li><a href="#launch">Запуск MySQL</a></li>
+                    <li><a href="#privs">Привилегии в MySQL</a></li>
+                    <li><a href="#create">Создание пользователя в MySQL</a></li>
+                    <li><a href="#set_privs">Назначение привилегий</a></li>
+                    <li><a href="#utils">Утилиты</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#task">Задание</a>
+            </li>
+            <li>
+                <a href="#questions">Вопросы</a>
+            </li>
+        </ul>
+    </nav>
+    <!--Main Content -->
+    <div class="col-xs-9">
+        <section id="intro" class="group">
+            <h3>Вводная</h3>
+            <div id="introGoal" class="subgroup">
+                <h4>Цель работы</h4>
+                Ознакомиться с приложениями, включенными в состав СУБД MySQL. Получить навыки
                 управления учетными записями пользователей и определения привилегий. Ознакомиться с утилитами, входящими
                 в состав СУБД MySQL, получить навыки работы с ними.
-
-
-                <h3 id="install">Установка MySQL</h3>
+            </div>
+            <div id="install" class="subgroup">
+                <h4>Установка MySQL</h4>
                 <p>
                     Есть несколько вариантов установки, в зависимости от того, будете ли вы использовать СУБД на своём
                     личном компьютере (что рекомендуется для полноценного освоения), или будете использовать компьютеры
                     института. </p>
-                <h4>Установка на личном компьютере</h4>
+                <h5>Установка на личном компьютере</h5>
                 <p>Вы можете воспользоваться тем же вариантом, что и для установки на компьютер института, но проще
                     будет использовать специальный инсталлятор.
                     Для установки на личном компьютере вы просто скачиваете с сайта <a
@@ -66,7 +82,7 @@
                     установить полный необходимый вам набор инстурментов. Все остальные параметры можно оставить по
                     умолчанию. Пароль для администратора вы можете придумать сами.
                 </p>
-                <h4>Установка на компьютере инстутута</h4>
+                <h5>Установка на компьютере инстутута</h5>
                 <p>Скачать актуальный дистрибутив СУБД MySQL можно по адресу<br>
 
                     <a href="https://dev.mysql.com/downloads/mysql/">https://dev.mysql.com/downloads/mysql/</a>
@@ -75,15 +91,17 @@
                     его из сетевого диска, куда его предварительно скопировал преподаватель. В данном случае вы просто
                     распаковываете скачанный архив к себе на локальный (не сетевой!) диск.
                 </p>
-                <h3 id="launch">Запуск MySQL</h3>
-                <h4>Запуск на личном компьютере</h4>
+            </div>
+            <div id="launch" class="subgroup">
+                <h4>Запуск MySQL</h4>
+                <h5>Запуск на личном компьютере</h5>
                 <p>
                     В случае, если вы установили MySQL при помощи инсталлятора, то его запуск и остановка будут
                     осуществляться через управление службами Windows. По умолчанию после установки сервис должен уже
-                    работать.
+                    работать.<br>
                     <img src="img/dbms-lab1/mysql-service.png">
                 </p>
-                <h4>Запуск на компьютере института</h4>
+                <h5>Запуск на компьютере института</h5>
                 <p>
                     Управление сервером будет осуществляться из командной строки. Для этого необходимо выполнить
                     следующие команды (перейдя в папку MySQL):
@@ -99,7 +117,8 @@
                     <li>
                         Теперь запускаем базу:
                         <pre class="prettyprint">bin\mysqld.exe --skip-log-syslog --standalone --console</pre>
-                        Если вы всё проделали правильно, то в консоли должна появиться строка "mysqld.exe: ready for connections".<br>
+                        Если вы всё проделали правильно, то в консоли должна появиться строка "mysqld.exe: ready for
+                        connections".<br>
                         После этого консоль перестаёт принимать ваш ввод и работает только на вывод информации.
                         Не закрывайте эту консоль - вместе с ней вы закроете серверный процесс
                         и больше не сможете общаться с СУБД! Для того, чтобы работать
@@ -113,11 +132,14 @@
                     <li>
                         И, оказавшись в консоли MySQL, меняем пароль:
                         <pre class="prettyprint lang-sql">SET PASSWORD FOR 'root'@'localhost' = PASSWORD('123');</pre>
-                        Не забудьте переподключиться и проверить, что пароль поменялся! Выйти из консоли MySQL в консоль Windows можно командой
+                        Не забудьте переподключиться и проверить, что пароль поменялся! Выйти из консоли MySQL в консоль
+                        Windows можно командой
                         <pre class="prettyprint">quit</pre>
                     </li>
                 </ol>
-                <h3 id="privs">Привилегии в MySQL</h3>
+            </div>
+            <div id="privs" class="subgroup">
+                <h4>Привилегии в MySQL</h4>
                 <p>Для работы с базами данных в MySQL необходим пользователь, наделённый такими правами. То есть
                     при подключении к базе данных Вы должны указывать логин пользователя и его пароль, и если доступ ему
                     открыт, то он получит определённые права.</p>
@@ -202,7 +224,9 @@
                 </ul>
                 <p>Если значение вышеназванных пределов равны "<b>0</b>", то ресурсы для пользователя не ограничены.</p>
 
-                <h3 id="create">Создание нового пользователя в MySQL</h3>
+            </div>
+            <div id="create" class="subgroup">
+                <h4>Создание нового пользователя в MySQL</h4>
                 <p>Ранее мы вносили все изменения в настройки MySQL под root-пользователем, имея полный доступ ко всем
                     базам данных. Однако для случаев, когда могут потребоваться более жесткие ограничения, есть способы
                     создания пользователей с особыми наборами прав доступа.
@@ -259,23 +283,29 @@
 
                 <pre class="prettyprint">mysql -u [имя пользователя]-p</pre>
 
-                <h3 id="utils">Основные утилиты MySQL.</h3>
+            </div>
+            <div id="utils" class="subgroup">
+                <h4>Основные утилиты MySQL.</h4>
                 <p>В состав дистрибутива MySQL входят следующие утилиты:</p>
                 <ul>
                     <li>mysqld</li>
-                    <li> mysql</li>
+                    <li>mysql</li>
                     <li>mysqladmin</li>
-                    <li> mysqlaccess</li>
-                    <li> mysqlshow</li>
-                    <li> mysqldump</li>
-                    <li> isamchk</li>
+                    <li>mysqlaccess</li>
+                    <li>mysqlshow</li>
+                    <li>mysqldump</li>
+                    <li>isamchk</li>
                 </ul>
-                <p><strong>Внимание!</strong> Утилиты - это отдельные программы, которые находятся в папке bin, а не команды MySQL.
-                Для их запуска вам нужно выйти из консоли MySQL (если вы в ней), и использовать обычную консоль Windows.
-                Так же рекомендуется перед запуском утилит сменить текущую папку на ту, в которой у вас находится MySQL.</p>
+                <div class="alert-danger alert">Утилиты - это отдельные программы, которые находятся в папке bin, а не
+                    команды MySQL.
+                    Для их запуска вам нужно выйти из консоли MySQL (если вы в ней), и использовать обычную консоль
+                    Windows.
+                    Так же рекомендуется перед запуском утилит сменить текущую папку на ту, в которой у вас находится
+                    MySQL.
+                </div>
                 <p>Утилиты mysqld и mysql были подробно рассмотрены ранее, поэтому возвращаться к ним не будем.
                     Кратко рассмотрим остальные.</p>
-                <h4>Mysqladmin</h4>
+                <h5>Mysqladmin</h5>
                 <p>Утилита для администрирования сервера. Может использоваться администратором, а также некоторыми
                     пользователями, которым предоставлены определенные привилегии, например – Reload_priv,
                     Shutdown_priv, Process_priv и File_priv. Данная команда может использоваться для создания баз
@@ -294,7 +324,7 @@
                 <pre class="prettyprint">mysqladmin -u your_name -p password new_password</pre>
                 Следует заметить, что в случае использования mysqladmin для установки пароля, не требуется
                 использование функции password().Mysqladmin сам заботится о шифровании пароля.
-                <h4>Mysqlaccess</h4>
+                <h5>Mysqlaccess</h5>
                 Используется для проверки привилегий пользователя для доступа к конкретной базе данных. Общий
                 синтаксис:
                 <pre class="prettyprint">mysqlaccess [host] [user] [db] опции</pre>
@@ -312,7 +342,7 @@
                     <li>-b, --brief Выводит краткие сведения о таблице</li>
                 </ul>
 
-                <h4>Mysqlshow</h4>
+                <h5>Mysqlshow</h5>
 
                 Используется, чтобы показать, с какими базами данных работает сервер, какие таблицы содержит каждая
                 БД и какие колонки есть в каждой таблице.Синтаксис:
@@ -328,12 +358,13 @@
                     <li>-V, --version Вывести информацию о версии</li>
                 </ul>
                 Если ввести mysqlshow без аргументов, будут показаны все базы данных, если указать имя БД, будут
-                показаны все таблицы в ней. Не забывайте так же указывать ваше имя пользователя и пароль, если он не пустой.
+                показаны все таблицы в ней. Не забывайте так же указывать ваше имя пользователя и пароль, если он не
+                пустой.
                 Команды
                 <pre class="prettyprint">mysqlshow</pre>
                 <pre class="prettyprint">mysqlshow mysql</pre>
 
-                <h4>Mysqldump</h4>
+                <h5>Mysqldump</h5>
 
                 Программа mysqldump используется для создания дампа содержания базы данных MySQL. Она пишет
                 инструкции SQL в стандартный вывод. Эти инструкции SQL могут быть переназначены в файл. Можно
@@ -376,30 +407,34 @@
                     После выполнения этой команды появился файл mysql-1.sql и mysql-2.sql. Загрузите их в текстовый
                     редактор, чтобы поподробнее изучить.</p>
 
-                <h3 id="task">Задание</h3>
-                <ul>
-                    <li>Запустите сервер MySQL. Зарегистрируйте своего пользователя в консольном приложении, задайте ему
-                        права.
-                    </li>
-                    <li>С помощью утилиты Mysqlshow выполните команду на просмотр структуры и состав таблиц базы
-                        Mysql.
-                    </li>
-                    <li>Приведите в отчете её схему. С помощью утилиты Mysqldump получите полный дамп базы Mysql (данные
-                        и
-                        таблицы), а также отдельные дампы таблиц и данных.
-                    </li>
-                </ul>
-                <h3 id="questions">Контрольные вопросы:</h3>
-
-                <ol>
-                    <li>Каким способом возможен запуск серверной части СУБД.</li>
-                    <li>Что такое привилегия. Каково её предназначение.</li>
-                    <li>Какие основные утилиты входят в состав СУБД, какие функции они выполняют.</li>
-                </ol>
-
             </div>
-        </div>
-    </section>
+        </section>
+        <section id="task" class="group">
+            <h3>Задание</h3>
+            <ul>
+                <li>Запустите сервер MySQL. Зарегистрируйте своего пользователя в консольном приложении, задайте ему
+                    права.
+                </li>
+                <li>С помощью утилиты Mysqlshow выполните команду на просмотр структуры и состав таблиц базы
+                    Mysql.
+                </li>
+                <li>Приведите в отчете её схему. С помощью утилиты Mysqldump получите полный дамп базы Mysql (данные
+                    и
+                    таблицы), а также отдельные дампы таблиц и данных.
+                </li>
+            </ul>
+        </section>
+        <section id="questions" class="group">
+            <h3>Вопросы</h3>
+
+            <ol>
+                <li>Каким способом возможен запуск серверной части СУБД.</li>
+                <li>Что такое привилегия. Каково её предназначение.</li>
+                <li>Какие основные утилиты входят в состав СУБД, какие функции они выполняют.</li>
+            </ol>
+
+        </section>
+    </div>
 </div>
 <script src="dist/bundle.js"></script>
 </body>
