@@ -2,59 +2,77 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="description" content="">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="MobileOptimized" content="320">
-    <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Лабораторная #2 по базам данных</title>
-    <link href="http://fonts.googleapis.com/css?family=Raleway:700,300" rel="stylesheet"
-          type="text/css">
     <link rel="stylesheet" href="dist/styles.css">
+    <title>Лабораторная работа №2. Создание баз данных и таблиц в среде MYSQL. Информационное наполнение</title>
+    <meta content="width=device-width,initial-scale=1" name=viewport>
 </head>
 <body>
-<div class="wrapper">
-    <nav>
-
-        <div class="pull-left">
-            <h1><a href="./"><img src="img/icon.png" alt="Free Documentation Template Icon"/> <span>Все материалы</span></a>
-            </h1>
+<!-- Top Navbar -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle"
+                    data-toggle="collapse"
+                    data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+                Лабораторная работа №2. Создание баз данных и таблиц в среде MYSQL. Информационное наполнение.
+            </a>
         </div>
-
-        <div class="pull-right">
-
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="./">Все материалы</a></li>
+                <!--<li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>-->
+            </ul>
         </div>
-
+    </div>
+</div>
+<div class="row" id="content">
+    <!--Nav Bar -->
+    <nav class="col-xs-3 bs-docs-sidebar">
+        <ul id="sidebar" class="nav nav-stacked fixed">
+            <li><a href="#intro">Вводная</a></li>
+            <ul class="nav nav-stacked">
+                <li><a href="#introGoal">Цель работы</a></li>
+            </ul>
+            <li><a href="#task">Задание</a>
+                <ul class="nav nav-stacked">
+                    <li><a href="#info">Изучить</a></li>
+                    <li><a href="#create">Содание базы данных</a></li>
+                    <li><a href="#create_tables">Содание таблиц</a></li>
+                    <li><a href="#integrity">Ссылочная целостность</a></li>
+                    <li><a href="#manual">Загрузка данных вручную</a></li>
+                    <li><a href="#text">Загрузка из текстового файла</a></li>
+                    <li><a href="#soft">Программная загрузка</a></li>
+                    <li><a href="#data">Данные для загрузки</a></li>
+                    <li><a href="#finish">Завершение работы</a></li>
+                </ul>
+            </li>
+            <li><a href="#questions">Вопросы</a></li>
+        </ul>
     </nav>
 
-    <header>
-        <div class="container">
-            <h2 class="lone-header">Лабораторная #2 по базам данных</h2>
-        </div>
-    </header>
-    <section>
-        <div class="container">
-            <ul class="docs-nav">
-                <li><a href="#create" class="cc-active">Содание базы данных</a></li>
-                <li><a href="#create_tables" class="cc-active">Содание таблиц</a></li>
-                <li><a href="#integrity" class="cc-active">Ссылочная целостность</a></li>
-                <li><a href="#manual" class="cc-active">Загрузка данных вручную</a></li>
-                <li><a href="#text" class="cc-active">Загрузка из текстового файла</a></li>
-                <li><a href="#soft" class="cc-active">Программная загрузка</a></li>
-                <li><a href="#data" class="cc-active">Данные для загрузки</a></li>
-                <li><a href="#finish" class="cc-active">Завершение работы</a></li>
-                <li><a href="#questions" class="cc-active">Вопросы</a></li>
-                <li class="separator"></li>
-            </ul>
-            <div class="docs-content">
-                <h2>Лабораторная работа №2. Создание баз данных и таблиц в среде MYSQL. Информационное наполнение.</h2>
-
-                <b>Цель работы:</b> : Ознакомиться с возможностями СУБД MySQL и создать с его помощью базу данных, набор
-                таблиц в ней и заполнить таблицы данными для последующей работы.
-
-                <h2>Содержание работы и методические указания к ее выполнению</h2>
-                <h3>1. Изучить набор команд языка SQL, связанный с созданием базы данных, созданием, модификацией
+    <div class="col-xs-9">
+        <section id="intro" class="group">
+            <h1>Вводная</h1>
+            <div id="introGoal" class="subgroup">
+                <h2>Цель работы</h2>
+                <p>Ознакомиться с возможностями СУБД MySQL и создать с его помощью базу данных, набор
+                    таблиц в ней и заполнить таблицы данными для последующей работы.</p>
+                <p>Изучить набор команд языка SQL, связанный с созданием базы данных, созданием, модификацией
                     структуры
-                    таблиц и их удалением, вставкой, модификацией и удалением записей таблиц.</h3>
+                    таблиц и их удалением, вставкой, модификацией и удалением записей таблиц.</p>
+            </div>
+        </section>
+        <section id="task" class="group">
+            <h1>Содержание работы и методические указания к ее выполнению</h1>
+            <div id="info" class="subgroup">
+                <h2>Изучить</h2>
+
                 <b>Список команд:</b>
                 <ul>
                     <li>create database DB_name создание базы данных</li>
@@ -69,10 +87,13 @@
                     <li>update модификация одной или нескольких строк таблицы</li>
                     <li>LOAD DATA INFILE загрузка данных в таблицы из файла</li>
                 </ul>
-                <h3 id="create">2. Создать базу данных.</h3>
-                Создание базы данных в MySQL производится с помощью утилиты mysqladmin. Изначально существует только БД
-                mysql для администратора и БД test, в которую может войти любой пользователь и которая по умолчанию
-                пуста. Приведенный ниже пример иллюстрирует создание базы данных.
+            </div>
+            <div id="create" class="subgroup">
+                <h2>Создать базу данных.</h2>
+                <p>Создание базы данных в MySQL производится с помощью утилиты mysqladmin. Изначально существует только
+                    БД
+                    mysql для администратора и БД test, в которую может войти любой пользователь и которая по умолчанию
+                    пуста. Приведенный ниже пример иллюстрирует создание базы данных.</p>
 
                 <pre class="prettyprint">
 Mysql/bin&gt;mysqladmin -u root -p create data_name
@@ -114,8 +135,9 @@ Database changed.</pre>
                     вводить данные, задавать ключевые поля. Помимо этого можно в специально отведенном окне напрямую
                     вводить
                     инструкции, используя синтаксис языка SQL.</p>
-
-                <h3 id="create_tables">3. Средствами языка SQL необходимо создать четыре таблицы в базе данных</h3>
+            </div>
+            <div id="create_tables" class="subgroup">
+                <h2>Средствами языка SQL необходимо создать четыре таблицы в базе данных</h2>
                 Используйте команду CREATE TABLE. Для таблицы products:
                 <pre class="prettyprint lang-sql">CREATE TABLE products (
                 id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -134,8 +156,9 @@ Database changed.</pre>
                         символьный тип и длину 20 (varchar(20));
                     </li>
                 </ul>
-
-                <h3 id="integrity">4. Обеспечить ссылочную целостность вашей базы данных при помощи FOREIGN KEY</h3>
+            </div>
+            <div id="integrity" class="subgroup">
+                <h3>Обеспечить ссылочную целостность вашей базы данных при помощи FOREIGN KEY</h3>
 
                 <p>Ссылочная целостность—это состояние реляционной базы данных в которой записи не могут ссылаться на
                     несуществующие записи в этой базе данных.</p>
@@ -295,11 +318,14 @@ mysql> SELECT * FROM products WHERE id_catalog = 1;
                 <p>приведет к тому что изменения таблицы catalogs приведет к автоматическому изменению таблицы
                     products.</p>
 
+            </div>
+            <div id="manual" class="subgroup">
 
-                <h3>5. Загрузка данных</h3>
+                <h2>Загрузка данных вручную</h2>
+                (, используя команду insert into;)
                 После создания пустых таблиц их необходимо наполнить данными. Вводить данные в нее можно несколькими
                 способами (ознакомьтесь со всеми, выберите один для исопльзования):<br>
-                <h4 id="manual">Вручную, используя команду insert into;</h4>
+
                 Пример ввода данных вручную (команда INSERT):
 
                 <pre class="prettyprint lang-sql">insert into products (name, city)values ('Жесткий диск','Париж');</pre>
@@ -311,7 +337,9 @@ mysql> SELECT * FROM products WHERE id_catalog = 1;
                 <pre class="prettyprint  lang-sql">INSERT INTO table_name (id, name) VALUES ('id_value', 'name_value');</pre>
                 Записать и выполнить совокупность запросов для занесения нижеприведенных данных в созданные таблицы
                 <pre class="prettyprint lang-sql">insert into имя_таблицы [(поле [,поле]...)] values (константа [,константа]...)</pre>
-                <h4 id="text">Загрузить данные из текстового файла</h4>
+            </div>
+            <div id="text" class="subgroup">
+                <h2>Загрузить данные из текстового файла</h2>
                 Это является более предпочтительным, особенно если нужно ввести
                 несколько тысяч записей.
 
@@ -353,11 +381,14 @@ mysql> SELECT * FROM products WHERE id_catalog = 1;
                         указывает разделители строк.
                     </li>
                 </ul>
-                <h4 id="soft"> Программно</h4>
+            </div>
+            <div id="soft" class="subgroup">
+                <h2> Программно</h2>
                 Можно использовать утилиту mysqlimport для загрузки данных из текстового файла, или использовать
                 программы MySQL-Front, Mysql Workbench или SQLyog.
-
-                <h3 id="data">Данные для создания базы</h3>
+            </div>
+            <div id="data" class="subgroup">
+                <h2>Данные для создания базы</h2>
 
                 <h4>Таблица поставщиков (shippers aka S)</h4>
                 <table style="max-width: 500px;width: 100%">
@@ -651,18 +682,22 @@ mysql> SELECT * FROM products WHERE id_catalog = 1;
                         <td>500</td>
                     </tr>
                 </table>
-
-                <h3 id="finish">Завершение работы</h3>
+            </div>
+            <div id="finish" class="subgroup">
+                <h2>Завершение работы</h2>
                 Убедиться в успешности выполненных действий. При необходимости исправить ошибки.
 
-                <p>5. Выполнить модификацию структуры таблицы supplies (SPJ), добавив поле с датой поставки. Убедиться в
+                <p>5. Выполнить модификацию структуры таблицы supplies (SPJ), добавив поле с датой поставки.
+                    Убедиться в
                     успешности выполненных действий. При необходимости исправить ошибки (команда Alter table).</p>
                 <p>6. Уничтожить созданные таблицы, предварительно <strong> сохранив инструкции</strong> для
                     восстановления структуры БД и
                     информационного наполнения, используя средства работы СУБД. Убедиться в успешности выполненных
                     действий.</p>
-                <p>7. Выполнить необходимые действия, написав и выполнив соответствующие запросы для модификации таблиц,
-                    чтобы структура соответствовала концептуальной модели учебной базы данных (рисунок ниже). Убедиться
+                <p>7. Выполнить необходимые действия, написав и выполнив соответствующие запросы для модификации
+                    таблиц,
+                    чтобы структура соответствовала концептуальной модели учебной базы данных (рисунок ниже).
+                    Убедиться
                     в
                     успешности выполненных действий. При необходимости исправить ошибки.</p>
 
@@ -671,24 +706,26 @@ mysql> SELECT * FROM products WHERE id_catalog = 1;
                 <p>Проверить результат заполнения таблиц, написав и выполнив простейший запрос:</p>
                 <pre class="prettyprint lang-sql">SELECT * FROM имя_таблицы</pre>
                 При наличии ошибок выполнить корректировку, исправив либо удалив ошибочные строки таблиц
-
-                <h3 id="questions">Контрольные вопросы</h3>
-                <ul>
-                    <li>В каких режимах возможно создание базы данных?</li>
-                    <li>Какие типы данных допустимы при создании таблицы?</li>
-                    <li>Как выполнить создание таблицы средствами СУБД?</li>
-                    <li>Как выполнить создание таблицы средствами языка SQL?</li>
-                    <li>Как разделяются операторы SQL в случае нескольких операторов в запросе?</li>
-                    <li>Каким образом выполнить простейшие операции вставки строк данных в таблицу средствами SQL?</li>
-                    <li>Каким образом выполнить простейшие операции модификации строк таблицы средствами SQL?</li>
-                    <li>Каким образом выполнить просмотр таблицы?</li>
-                    <li>Как получить информацию о структуре таблицы в рамках СУБД MySQL?</li>
-                </ul>
-
             </div>
-        </div>
-    </section>
+        </section>
+        <section id="questions" class="group">
+            <h1>Вопросы</h1>
+            <ol>
+                <li>В каких режимах возможно создание базы данных?</li>
+                <li>Какие типы данных допустимы при создании таблицы?</li>
+                <li>Как выполнить создание таблицы средствами СУБД?</li>
+                <li>Как выполнить создание таблицы средствами языка SQL?</li>
+                <li>Как разделяются операторы SQL в случае нескольких операторов в запросе?</li>
+                <li>Каким образом выполнить простейшие операции вставки строк данных в таблицу средствами SQL?
+                </li>
+                <li>Каким образом выполнить простейшие операции модификации строк таблицы средствами SQL?</li>
+                <li>Каким образом выполнить просмотр таблицы?</li>
+                <li>Как получить информацию о структуре таблицы в рамках СУБД MySQL?</li>
+            </ol>
+        </section>
+    </div>
 </div>
+
 <script src="dist/bundle.js"></script>
 </body>
 </html>
