@@ -2,59 +2,83 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="description" content="">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="MobileOptimized" content="320">
-    <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Материалы для студентов МАМИ</title>
-    <link href="http://fonts.googleapis.com/css?family=Raleway:700,300" rel="stylesheet"
-          type="text/css">
     <link rel="stylesheet" href="dist/styles.css">
+    <title>Материалы для студентов МАМИ</title>
+    <meta content="width=device-width,initial-scale=1" name=viewport>
 </head>
 <body>
-<div class="wrapper">
-    <header>
-        <div class="container">
-            <h2 class="lone-header">Материалы для студентов МАМИ</h2>
+<!-- Top Navbar -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle"
+                    data-toggle="collapse"
+                    data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+                Материалы для студентов МАМИ.
+            </a>
         </div>
-    </header>
-    <section>
-        <div class="container">
-            <ul class="docs-nav">
-                <li><a href="#dbms" class="cc-active">Базы данных</a></li>
-                <li><a href="#infosec" class="cc-active">Информационная безопасность</a></li>
-                <li class="separator"></li>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="./">Все материалы</a></li>
+                <!--<li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>-->
             </ul>
-            <div class="docs-content">
-                <h2 id="dmbs"> Базы данных</h2>
-                <h3> Лабораторные</h3>
-                <ul>
-                    <li><a href="dbms-lab1.html">Лабораторная работа #1</a></li>
-                    <li><a href="dbms-lab2.html">Лабораторная работа #2</a></li>
-                    <li><a href="dbms-lab3.html">Лабораторная работа #3</a></li>
-                    <li><a href="dbms-lab4.html">Лабораторная работа #4</a></li>
-                </ul>
-                <h2 id="infosec"> Информационная безопасность</h2>
-                <h3> Лабораторные</h3>
-                <ul>
-                    <li><a href="infosec-lab1.html">Лабораторная работа #1</a></li>
-                    <li><a href="infosec-lab2.html">Лабораторная работа #2</a></li>
-                    <li><a href="infosec-lab3.html">Лабораторная работа #3</a></li>
-                    <li><a href="infosec-lab4.html">Лабораторная работа #4</a></li>
-                    <li><a href="infosec-lab5.html">Лабораторная работа #5</a></li>
-                    <li><a href="infosec-lab6.html">Лабораторная работа #6</a></li>
-                    <li><a href="infosec-lab7.html">Лабораторная работа #7</a></li>
-                    <li><a href="infosec-lab8.html">Лабораторная работа #8</a></li>
-                    <ul><li><a href="infosec-lab8-kali.html">Установка Kali Linux</a></li></ul>
-                </ul>
-                <h2 id="mk">Мастерклассы</h2>
-                <ul>
-                    <li><a href="mk-arduino1.html">Вступительный МК по Arduino</a></li>
-                </ul>
-
-            </div>
         </div>
-    </section>
+    </div>
+</div>
+<div class="row" id="content">
+    <!--Nav Bar -->
+    <nav class="col-xs-3 bs-docs-sidebar">
+        <ul id="sidebar" class="nav nav-stacked fixed">
+            <li><a href="#dbms">Базы данных</a></li>
+            <li><a href="#infosec">Информационная безопасность</a></li>
+            <li><a href="#mk">Мастерклассы</a></li>
+        </ul>
+    </nav>
+    <div class="col-xs-9">
+        <section id="dmbs" class="group">
+            <h1>Базы данных</h1>
+            <h3>Лабораторные</h3>
+            <ul>
+                <li><a href="dbms-lab1.html">Лабораторная работа #1</a></li>
+                <li><a href="dbms-lab2.html">Лабораторная работа #2</a></li>
+                <li><a href="dbms-lab3.html">Лабораторная работа #3</a></li>
+                <li><a href="dbms-lab4.html">Лабораторная работа #4</a></li>
+            </ul>
+        </section>
+        <section id="infosec" class="group">
+            <h1>Информационная безопасность</h1>
+            <h3>Лабораторные</h3>
+            <ul>
+                <li><a href="infosec-lab1.html">Лабораторная работа #1</a></li>
+                <li><a href="infosec-lab2.html">Лабораторная работа #2</a></li>
+                <li><a href="infosec-lab3.html">Лабораторная работа #3</a></li>
+                <li><a href="infosec-lab4.html">Лабораторная работа #4</a></li>
+                <li><a href="infosec-lab5.html">Лабораторная работа #5</a></li>
+                <li><a href="infosec-lab6.html">Лабораторная работа #6</a></li>
+                <li><a href="infosec-lab7.html">Лабораторная работа #7</a></li>
+                <li><a href="infosec-lab8.html">Лабораторная работа #8</a></li>
+                <ul>
+                    <li><a href="infosec-lab8-kali.html">Установка Kali Linux</a></li>
+                    <li><a href="infosec-lab8-dvwa.html">Установка DVWA</a></li>
+                    <li><a href="infosec-lab8-hydra.html">Hydra</a></li>
+                    <li><a href="infosec-lab8-nikto.html">Nikto</a></li>
+                    <li><a href="infosec-lab8-sqlmap.html">SQLMap</a></li>
+                </ul>
+            </ul>
+        </section>
+        <section id="mk" class="group">
+            <h1>Мастерклассы</h1>
+            <ul>
+                <li><a href="mk-arduino1.html">Вступительный МК по Arduino</a></li>
+            </ul>
+        </section>
+    </div>
 </div>
 <script src="dist/bundle.js"></script>
 </body>
