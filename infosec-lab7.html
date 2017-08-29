@@ -2,49 +2,63 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="description" content="">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="MobileOptimized" content="320">
-    <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Лабораторная #7 по Информационной безопасности</title>
-    <link href="http://fonts.googleapis.com/css?family=Raleway:700,300" rel="stylesheet"
-          type="text/css">
     <link rel="stylesheet" href="dist/styles.css">
+    <title>Лабораторная #7 по Информационной безопасности</title>
+    <meta content="width=device-width,initial-scale=1" name=viewport>
 </head>
 <body>
-<div class="wrapper">
-    <nav>
-
-        <div class="pull-left">
-            <h1><a href="./"><img src="img/icon.png" alt="Free Documentation Template Icon"/> <span>Все материалы</span></a>
-            </h1>
+<!-- Top Navbar -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle"
+                    data-toggle="collapse"
+                    data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+                Лабораторная #7 по информационной безопасности
+            </a>
         </div>
-
-        <div class="pull-right">
-
-        </div>
-
-    </nav>
-    <header>
-        <div class="container">
-            <h2 class="lone-header">Лабораторная #7 по информационной безопасности</h2>
-        </div>
-    </header>
-    <section>
-        <div class="container">
-            <ul class="docs-nav">
-                <li><a href="#intro" class="cc-active">Введение</a></li>
-                <li><a href="#task" class="cc-active">Задание</a></li>
-                <li><a href="#questions" class="cc-active">Вопросы</a></li>
-                <li class="separator"></li>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="./">Все материалы</a></li>
+                <!--<li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>-->
             </ul>
-            <div class="docs-content">
-                <h2>Лабораторная работа №7. Шифрование</h2>
+        </div>
+    </div>
+</div>
+<div class="row" id="content">
+    <!--Nav Bar -->
+    <nav class="col-xs-3 bs-docs-sidebar">
+        <ul id="sidebar" class="nav nav-stacked fixed">
+            <li>
+                <a href="#intro">Вводная</a>
+                <ul class="nav nav-stacked">
+                    <li><a href="#introGoal">Цель работы</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#task">Задание</a>
+            </li>
+            <li>
+                <a href="#questions">Вопросы</a>
+            </li>
+        </ul>
+    </nav>
 
-                <b>Цель работы:</b> Разобраться в основных понятиях шифрования и в подходах к его взлому.
-
-
-                <h3 id="intro">Введение</h3>
+    <!--Main Content -->
+    <div class="col-xs-9">
+        <section id="intro" class="group">
+            <h1>Вводная</h1>
+            <div id="introGoal" class="subgroup">
+                <h2>Цель работы</h2> Разобраться в основных понятиях шифрования и в подходах к его взлому.
+            </div>
+            <div id="introWhat" class="subgroup">
+                <h2>Введение</h2>
                 <p>Чтобы вам было легче и приятнее начинать даннную тему, для прочтения рекомендуется:</p>
                 <ul>
                     <li>"Золотой жук" Эдгара По - небольшой рассказ про простейшее шифрование
@@ -223,33 +237,37 @@
 
                 </ul>
                 <p>Детальное описание каждого вида шифрования можно посмотреть в пособии к курсу лекций.</p>
-                <h3 id="task">Задание</h3>
-                <ul>
-                    <li>Под каждый вид шифрования из перечисленных выше, сделайте реализацию на удобном языке
-                        разработки.
-                        Можно как использовать как готовые библиотеки и функции (openssl, strtr, md5, sha1, etc...),
-                        так и реализовать свои варианты.
-                    </li>
-                    <li>Реализовать алгоритм взлома моноалфавитного шифра методом частотного анализа (с
-                        демонстрацией).
-                    </li>
-                </ul>
-                <h3 id="questions">Контрольные вопросы:</h3>
-
-                <p>
-                <ul>
-                    <li>Перечислите, какие бывают виды шифрования.
-                    </li>
-                    <li>Для чего используются функции хэширования?</li>
-                    <li>С какими основными опасностями вы сталкиваетесь при попытке безопасного шифрования?</li>
-                    <li>Объясните принцип ассиметричного шифрования.</li>
-                    <li>Какие есть методы взломы моноалфавитного шифра?</li>
-                    <li>Как можно узнать исходный пароль по хэшу?</li>
-                </ul>
             </div>
-        </div>
-    </section>
+        </section>
+        <section id="task" class="group">
+            <h1>Задание</h1>
+            <ul>
+                <li>Под каждый вид шифрования из перечисленных выше, сделайте реализацию на удобном языке
+                    разработки.
+                    Можно как использовать как готовые библиотеки и функции (openssl, strtr, md5, sha1, etc...),
+                    так и реализовать свои варианты.
+                </li>
+                <li>Реализовать алгоритм взлома моноалфавитного шифра методом частотного анализа (с
+                    демонстрацией).
+                </li>
+            </ul>
+        </section>
+        <section id="questions" class="group">
+            <h1>Вопросы</h1>
+
+            <ol>
+                <li>Перечислите, какие бывают виды шифрования.
+                </li>
+                <li>Для чего используются функции хэширования?</li>
+                <li>С какими основными опасностями вы сталкиваетесь при попытке безопасного шифрования?</li>
+                <li>Объясните принцип ассиметричного шифрования.</li>
+                <li>Какие есть методы взломы моноалфавитного шифра?</li>
+                <li>Как можно узнать исходный пароль по хэшу?</li>
+            </ol>
+        </section>
+    </div>
 </div>
+
 <script src="dist/bundle.js"></script>
 </body>
 </html>
