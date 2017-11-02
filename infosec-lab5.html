@@ -89,7 +89,7 @@
                 </p>
                 <h2>Защита через javascript</h2>
                 <p>
-                    Самый простой способ — сделать редирект с помощью js, если сайт открыт в ифрейме (пример):
+                    Самый простой способ — сделать редирект с помощью js, если сайт открыт в iframe (пример):
                 </p>
                 <pre class="prettyprint lang-javascript">
 if(top != self)
@@ -104,10 +104,13 @@ if(top != self)
                 <p>
                     В дополнение к предыдущему методу, разработчики браузеров ввели новый заголовок ответа сервера
                     X-Frame-Options.
-                    Он позволяет не отображать сайт, если он загружается c другого домена через ифрейм. Пример настроек
-                    для Apache и nginx:</p>
+                    Он позволяет не отображать сайт, если он загружается c другого домена через iframe. Пример настроек
+                    для Apache</p>
                 <pre class="prettyprint">
-Header always append X-Frame-Options SAMEORIGIN
+Header always append X-Frame-Options SAMEORIGIN</pre>
+                <p>пример настройки для nginx:</p>
+
+                <pre class="prettyprint">
 add_header X-Frame-Options SAMEORIGIN;</pre>
             </div>
             <div id="introM3" class="subgroup">
@@ -128,9 +131,9 @@ add_header X-Frame-Options SAMEORIGIN;</pre>
         <section id="task" class="group">
 
             <h1>Задание</h1>
-            <p><strong>Внимание! Примеры создаются и эксплуатируются только на ваших тестовых проектах.
+            <div class="alert alert-danger">Внимание! Примеры создаются и эксплуатируются только на ваших тестовых проектах.
                 Запрещается
-                их демонстрация на каких либо внешних сайтах.</strong></p>
+                их демонстрация на каких либо внешних сайтах.</div>
             <ul>
                 <li>Реализуйте пример эксплуатации кликджекинга на некоем целевом сайте.
                 </li>
