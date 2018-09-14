@@ -4,10 +4,10 @@
   "description": "Здесь выложены материалы, которыми я пользуюсь для чтения курсов и мастерклассов в МАМИ.",
   "main": "index.js",
   "scripts": {
-    "lint": "node ./node_modules/eslint/bin/eslint.js ./src/js/",
-    "build-dev": "node ./node_modules/webpack/bin/webpack.js --env=dev --progress --profile --colors",
+    "lint": "node ./node_modules/eslint/bin/eslint.js ./src/js webpack.config.js webpack.prod.js",
     "build": "node ./node_modules/webpack/bin/webpack.js --env=prod --progress --profile --colors",
-    "prepublish": "npm run build"
+    "deploy": "gh-pages -d dist",
+    "test": "npm run lint && npm run build"
   },
   "repository": {
     "type": "git",
@@ -22,26 +22,29 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "code-prettify": "^0.1.0",
-    "jquery": "^3.2.1"
+    "jquery": "^3.3.1",
+    "gh-pages": "^1.2.0"
   },
   "devDependencies": {
-    "babel-core": "^6.25.0",
-    "babel-loader": "^7.1.1",
-    "babel-preset-env": "^1.6.0",
-    "clean-webpack-plugin": "^0.1.16",
-    "css-loader": "^0.28.4",
-    "eslint": "^3.16.1",
-    "eslint-config-airbnb": "^14.1.0",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-react": "^6.10.0",
-    "eslint-plugin-standard": "^2.1.1",
-    "extract-text-webpack-plugin": "^3.0.0",
-    "file-loader": "^0.11.2",
-    "html-webpack-plugin": "^2.29.0",
-    "style-loader": "^0.18.2",
-    "webpack": "^3.2.0",
-    "webpack-bundle-analyzer": "^2.8.2"
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "clean-webpack-plugin": "^0.1.19",
+    "copy-webpack-plugin": "^4.5.2",
+    "css-loader": "^1.0.0",
+    "eslint": "^5.5.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-react": "^7.11.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^2.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "style-loader": "^0.23.0",
+    "webpack": "^4.19.0",
+    "webpack-bundle-analyzer": "^3.0.2",
+    "webpack-cli": "^3.1.0"
   }
 }

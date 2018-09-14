@@ -1,7 +1,5 @@
-const webpackDev  = require('./webpack.dev'),
-      webpackProd = require('./webpack.prod');
+const webpackProd = require('./webpack.prod');
 
-const webpack = {dev: webpackDev, prod: webpackProd};
+const webpack = {prod: webpackProd};
 
 module.exports = env=>webpack[env];
-

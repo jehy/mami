@@ -1,0 +1,78 @@
+[
+  {
+    "filename": "dbms-lab1",
+    "name": "Лабораторная работа №1. Интерфейс СУБД MySQL. Предоставление доступа. Утилиты"
+  },
+  {
+    "filename": "dbms-lab2",
+    "name": "Лабораторная работа №2. Создание баз данных и таблиц в среде MYSQL. Информационное наполнение"
+  },
+  {
+    "filename": "dbms-lab3",
+    "name": "Лабораторная работа №3. Создание запросов и модификация таблиц базы данных."
+  },
+  {
+    "filename": "dbms-lab4",
+    "name": "Лабораторная работа №4. Использование транзакций"
+  },
+  {
+    "filename": "index",
+    "name": "Материалы для студентов МАМИ"
+  },
+  {
+    "filename": "infosec-lab1",
+    "name": "Лабораторная #1. Разбор и генерация HTTP запроса"
+  },
+  {
+    "filename": "infosec-lab2",
+    "name": "Лабораторная #2. SQL injections"
+  },
+  {
+    "filename": "infosec-lab3",
+    "name": "Лабораторная работа №3. Межсайтовый скриптинг (XSS)"
+  },
+  {
+    "filename": "infosec-lab4",
+    "name": "Лабораторная работа №4. Защита от внедрения вредоносных файлов"
+  },
+  {
+    "filename": "infosec-lab5",
+    "name": "Лабораторная работа №5. Кликджекинг"
+  },
+  {
+    "filename": "infosec-lab6",
+    "name": "Лабораторная #6. Шифрование"
+  },
+  {
+    "filename": "infosec-lab7",
+    "name": "Лабораторная работа №7. Автоматизированное тестирование уязвимостей"
+  },
+  {
+    "filename": "infosec-lab8",
+    "name": "Лабораторная работа №8. Тестирование веб приложения"
+  },
+  {
+    "filename": "infosec-lab8-dvwa",
+    "name": "Лабораторная работа №8. Установка DVWA"
+  },
+  {
+    "filename": "infosec-lab8-hydra",
+    "name": "Лабораторная работа №8. Hydra"
+  },
+  {
+    "filename": "infosec-lab8-kali",
+    "name": "Лабораторная работа №8. Kali"
+  },
+  {
+    "filename": "infosec-lab8-nikto",
+    "name": "Лабораторная работа №8. Nikto"
+  },
+  {
+    "filename": "infosec-lab8-sqlmap",
+    "name": "Лабораторная работа №8. sqlmap"
+  },
+  {
+    "filename": "mk-arduino1",
+    "name": "Мастеркласс по Arduino"
+  }
+]
