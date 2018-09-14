@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1" name=viewport>
+<link href="styles.css?89721a0414d3f08ebd8e" rel="stylesheet"></head>
+<body>
+<!-- Top Navbar -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle"
+                    data-toggle="collapse"
+                    data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="./">
+                Все материалы
+            </a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Лабораторная работа №3. Межсайтовый скриптинг (XSS)</a></li>
+                <!--<li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>-->
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="row" id="content">
+    <nav class="col-xs-3 bs-docs-sidebar">
+    <ul id="sidebar" class="nav nav-stacked fixed col-xs-3">
+        <li>
+            <a href="#intro">Вводная</a>
+            <ul class="nav nav-stacked">
+                <li><a href="#introGoal">Цель работы</a></li>
+                <li><a href="#introWhat">Определение</a></li>
+            </ul>
+        </li>
+        <li><a href="#task">Задание</a></li>
+        <li><a href="#questions">Вопросы</a></li>
+    </ul>
+</nav>
+<!--Main Content -->
+<div class="col-xs-9">
+    <section id="intro" class="group">
+        <h1>Вводная</h1>
+        <div id="introGoal" class="subgroup">
+            <h2>Цель работы</h2>
+            <p>Ознакомиться с принципами использования и защиты от XSS.</p>
+        </div>
+        <div id="introWhat" class="subgroup">
+            <h2>Определение</h2>
+            <p>XSS (англ. Cross-Site Scripting — «межсайтовый скриптинг») — тип атаки на веб-системы,
+                заключающийся во внедрении в выдаваемую веб-системой страницу вредоносного кода (который будет
+                выполнен на компьютере пользователя при открытии им этой страницы) и взаимодействии этого кода с
+                веб-сервером злоумышленника. Является разновидностью атаки «внедрение кода».</p>
+
+            <p>Специфика подобных атак заключается в том, что вредоносный код может использовать авторизацию
+                пользователя в веб-системе для получения к ней расширенного доступа или для получения
+                авторизационных данных пользователя. Вредоносный код может быть вставлен в страницу как через
+                уязвимость в веб-сервере, так и через уязвимость на компьютере пользователя.</p>
+
+            <p>Для термина используют сокращение «XSS», чтобы не было путаницы с каскадными таблицами стилей,
+                использующими сокращение «CSS».</p>
+            <p>Подробнее про классификацию, примеры и средства защиты от XSS можно прочитать <a
+                    href="https://ru.wikipedia.org/wiki/Межсайтовый_скриптинг">здесь</a> или в любом другом
+                аналогичном источнике.</p>
+            <div class="alert alert-warning">Большинство современных браузеров обладают некоторой степенью защиты от
+                XSS, но для демонстрации уязвимости вы можете выключить эту защиту при помощи настроек браузера или
+                флагов. Например, для chrome это можно сделать при помощи флага запуска "--disable-web-security"
+            </div>
+        </div>
+    </section>
+    <section id="task" class="group">
+        <h1>Задание</h1>
+        <ul>
+            <li>Определите свой Вариант путём определения целочисленного остатка деления ASCII
+                кода 1 буквы
+                фамилии (в верхнем регистре) на 4 . Например, если ваша фамилия Иванов, то
+                вариант вы можете получить запросом
+                <pre class="prettyprint lang-sql">
+SELECT MOD(ORD("И"),4)+1
+</pre>
+            </li>
+            <li>Реализуйте демонстрацию использования XSS на своём тестовом проекте согласно полученному варианту:
+                <ol>
+                    <li>Отражённая XSS атака, заставляющая пользователя перейти на целевой веб сайт;</li>
+                    <li>Постоянная XSS атака, передающая COOKIE пользователя на целевой веб сайт;</li>
+                    <li>Кража данных из формы ввода с передачей на целевой сайт;</li>
+                    <li>Пример использования XSS для DDoS атаки;</li>
+                </ol>
+            </li>
+            <li>Реализуйте корректное исправление данной уязвимости</li>
+        </ul>
+    </section>
+    <section id="questions" class="group">
+        <h1>Вопросы</h1>
+
+        <ol>
+            <li>Назовите типы XSS по каналу внедрения;</li>
+            <li>Назовите типы XSS по вектору атаки;</li>
+            <li>Перечислите возможные последствия XSS;</li>
+            <li>Может ли XSS повредить серверу, на котором размещён уязвимый сайт?</li>
+            <li>Перечислите возомдные способы защиты от XSS.</li>
+        </ol>
+    </section>
+</div>
+
+
+</div>
+<script type="text/javascript" src="bundle.js?89721a0414d3f08ebd8e"></script></body>
+</html>

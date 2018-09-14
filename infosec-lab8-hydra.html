@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1" name=viewport>
+<link href="styles.css?89721a0414d3f08ebd8e" rel="stylesheet"></head>
+<body>
+<!-- Top Navbar -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle"
+                    data-toggle="collapse"
+                    data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="./">
+                Все материалы
+            </a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Лабораторная работа №8. Hydra</a></li>
+                <!--<li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>-->
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="row" id="content">
+    <nav class="col-xs-3 bs-docs-sidebar">
+    <ul id="sidebar" class="nav nav-stacked fixed col-xs-3">
+        <li><a href="#guide">Инструкция</a></li>
+    </ul>
+</nav>
+<div class="col-xs-9">
+    <section id="guide" class="group">
+        <h1>Hydra</h1>
+        <p>Очень часто самым началом или концом теста приложения на безопасность
+            является подбор паролей. Сервисы, к которым можно применить данный метод атаки - самые различные. А
+            как следствие - различны и протоколы, и форматы обращений. Для унификации этой задачи есть отичный
+            инструмент - THC-Hydra. Версия 7.5
+            (из репозитория epel) поддерживает подбор по/для: asterisk cisco cisco-enable cvs firebird ftp ftps
+            http[s]-{head|get} http[s]-{get|post}-form http-proxy http-proxy-urlenum icq imap[s] irc ldap2[s]
+            ldap3[-{cram|digest}md5][s] mssql mysql nntp oracle-listener oracle-sid pcanywhere pcnfs pop3[s]
+            postgres rdp rexec rlogin rsh sip smb smtp[s] smtp-enum snmp socks5 ssh sshkey svn teamspeak
+            telnet[s] vmauthd vnc xmpp.</p>
+        <p> В качестве примера работы - предположим следующие исходные данные:
+
+        </p>
+        <ul>
+            <li>IP сервера 178.72.90.181;
+            </li>
+            <li>Сервис http на стандартном 80 порту;
+            </li>
+            <li>Для авторизации используется html форма, которая отправляет по адресу
+                http://178.72.90.181/cgi-bin/luci методом POST запрос вида username=root&password=test_password;
+            </li>
+            <li>В случае не удачной аутентификации пользователь наблюдает сообщение Invalid username and/or
+                password! Please try again.;
+            </li>
+        </ul>
+        <p>Тогда запрос к гидре будет выглядеть примерно так:</p>
+
+        <pre class="prettyprint lang-bash">
+hydra -l root -P ~/pass_lists/dedik_passes.txt -o ./hydra_result.log -f -V -s 80 178.72.90.181
+http-post-form "/cgi-bin/luci:username=^USER^&password=^PASS^:Invalid username"
+                </pre>
+        Мы используем http-post-form потому как авторизация происходит по http
+        методом post. После указания этого модуля идет строка
+        /cgi-bin/luci:username=^USER^&password=^PASS^:Invalid username, у которой через двоеточие (:)
+        указывается:
+
+        <ul>
+            <li>Путь до скрипта, который обрабатывает процесс аутентификации. В нашем случае это /cgi-bin/luci;
+            </li>
+            <li>
+                Строка, которая передается методом POST, в которой логин и пароль заменены на ^USER^ и ^PASS^
+                соответственно. У нас это username=^USER^&password=^PASS^;
+            </li>
+            <li>Строка, которая присутствует на странице при неудачной аутентификации. При её отсутствии гидра
+                поймет
+                что мы успешно вошли. В нашем случае это Invalid username;
+            </li>
+        </ul>
+
+    </section>
+</div>
+
+
+</div>
+<script type="text/javascript" src="bundle.js?89721a0414d3f08ebd8e"></script></body>
+</html>

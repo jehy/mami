@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1" name=viewport>
+<link href="styles.css?89721a0414d3f08ebd8e" rel="stylesheet"></head>
+<body>
+<!-- Top Navbar -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle"
+                    data-toggle="collapse"
+                    data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="./">
+                Все материалы
+            </a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Лабораторная работа №2. Создание баз данных и таблиц в среде MYSQL. Информационное наполнение</a></li>
+                <!--<li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>-->
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="row" id="content">
+    <nav class="col-xs-3 bs-docs-sidebar">
+    <ul id="sidebar" class="nav nav-stacked fixed col-xs-3">
+        <li><a href="#intro">Вводная</a>
+            <ul class="nav nav-stacked">
+                <li><a href="#introGoal">Цель работы</a></li>
+            </ul>
+        </li>
+        <li><a href="#task">Задание</a>
+            <ul class="nav nav-stacked">
+                <li><a href="#info">Команды</a></li>
+                <li><a href="#create">Содание базы данных</a></li>
+                <li><a href="#create_tables">Содание таблиц</a></li>
+                <li><a href="#integrity">Ссылочная целостность</a></li>
+                <li><a href="#manual">Загрузка данных вручную</a></li>
+                <li><a href="#text">Загрузка из текстового файла</a></li>
+                <li><a href="#soft">Программная загрузка</a></li>
+                <li><a href="#data">Данные для загрузки</a></li>
+                <li><a href="#finish">Завершение работы</a></li>
+            </ul>
+        </li>
+        <li><a href="#questions">Вопросы</a></li>
+    </ul>
+</nav>
+
+<div class="col-xs-9">
+    <section id="intro" class="group">
+        <h1>Вводная</h1>
+        <div id="introGoal" class="subgroup">
+            <h2>Цель работы</h2>
+            <p>Ознакомиться с возможностями СУБД MySQL и создать с его помощью базу данных, набор
+                таблиц в ней и заполнить таблицы данными для последующей работы.</p>
+            <p>Изучить набор команд языка SQL, связанный с созданием базы данных, созданием, модификацией
+                структуры
+                таблиц и их удалением, вставкой, модификацией и удалением записей таблиц.</p>
+        </div>
+    </section>
+    <section id="task" class="group">
+        <h1>Содержание работы и методические указания к ее выполнению</h1>
+        <div id="info" class="subgroup">
+            <h2>Команды</h2>
+
+            <b>Список команд:</b>
+            <ul>
+                <li>create database DB_name создание базы данных</li>
+                <li>Use database выбор существующей базы данных</li>
+                <li>close database закрытие файлов текущей базы данных</li>
+                <li>drop database удаление базы данных</li>
+                <li>create table создание таблицы базы данных</li>
+                <li>alter table модификация структуры базы данных</li>
+                <li>drop table удаление таблицы базы данных</li>
+                <li>insert добавление одной или нескольких строк в таблицу</li>
+                <li>delete удаление одной или нескольких строк из таблицы</li>
+                <li>update модификация одной или нескольких строк таблицы</li>
+                <li>LOAD DATA INFILE загрузка данных в таблицы из файла</li>
+            </ul>
+        </div>
+        <div id="create" class="subgroup">
+            <h2>Создать базу данных.</h2>
+            <p>Создание базы данных в MySQL производится с помощью утилиты mysqladmin. Изначально существует только
+                БД
+                mysql для администратора и БД test, в которую может войти любой пользователь и которая по умолчанию
+                пуста. Приведенный ниже пример иллюстрирует создание базы данных.</p>
+
+            <pre class="prettyprint">
+Mysql/bin&gt;mysqladmin -u root -p create data_name
+Enter password:******
+Database "data_name" created.
+mysqlbin&gt;
+                </pre>
+            Где data_name – имя создаваемой БД. Проверить, что БД создана можно ранее рассмотренной командой Show
+            databases или утилитой mysqlshow.<br>
+            По умолчанию, root имеет доступ ко всем базам данных и таблицам. Перейти в созданную базу данных можно,
+            используя команду mysql <b>Use database</b>.
+            <pre class="prettyprint">
+Mysql/bin&gt;mysql -u root -p data1
+Enter password:******
+
+Welcome to MySQL monitor.</pre>
+            Или, находясь в другой базе данных, например в mysql ввести команду:
+
+            <pre class="prettyprint">
+mysql&gt;use data1
+
+Database changed.</pre>
+            Создать базу данных можно непосредственно находясь в клиентском приложении MySQL, вводом команды:
+            <pre class="prettyprint lang-sql">CREATE DATABASE Base_name</pre>
+            Где Base_name имя создаваемой базы данных. В созданной базе можно создавать таблицы и вводить
+            информацию. Указанные операции можно выполнить, используя специализированное программное обеспечение,
+            например MySQL-Front, Mysql Workbench или SQLyog.
+            <p>Необходимо указать:</p>
+            <ul>
+                <li>Имя;</li>
+                <li>Хост;</li>
+                <li>Пароль;</li>
+                <li>Порт;</li>
+                <li>Имя БД (при необходимости).</li>
+            </ul>
+
+
+            <p>После задания активной БД можно с помощью средств, предоставляемых программой изменять структуру БД,
+                вводить данные, задавать ключевые поля. Помимо этого можно в специально отведенном окне напрямую
+                вводить
+                инструкции, используя синтаксис языка SQL.</p>
+        </div>
+        <div id="create_tables" class="subgroup">
+            <h2>Средствами языка SQL необходимо создать четыре таблицы в базе данных</h2>
+            Используйте команду CREATE TABLE. Для таблицы products:
+            <pre class="prettyprint lang-sql">CREATE TABLE products (
+                id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                name varchar(20) NOT NULL,
+                city varchar(20) default NULL
+                );</pre>
+            Значками /* */ - выделяются комментарии в тексте запроса.<br>
+            При создании таблиц выполнить такую реализацию, чтобы она отражала структуру таблиц, указанных ниже
+            (таблицы products, shippers, supplies, details ) и должны быть наложены следующие ограничения:
+
+            <ul>
+                <li>поля номер_поставщика, номер_детали, номер_изделия во всех таблицах имеет тип INTEGER
+                </li>
+                <li>поля рейтинг, вес и количество имеют целочисленный тип (integer);</li>
+                <li>поля фамилия, город (поставщика, детали или изделия), название (детали или изделия) имеют
+                    символьный тип и длину 20 (varchar(20));
+                </li>
+            </ul>
+        </div>
+        <div id="integrity" class="subgroup">
+            <h3>Обеспечить ссылочную целостность вашей базы данных при помощи FOREIGN KEY</h3>
+
+            <p>Ссылочная целостность—это состояние реляционной базы данных в которой записи не могут ссылаться на
+                несуществующие записи в этой базе данных.</p>
+
+            <p>FOREIGN KEY—особый вид ограничения(constraint) MySQL, которое позволяет предотвратить нарушение
+                ссылочной целостности при удалении/изменении информации в таблицах предках. Поддержка FOREIGN KEY
+                поддерживается только для таблиц типа InnoDB</p>
+
+            <p>Пример нарушения ссылочной целостности</p>
+
+            <p>Пусть существуют две таблицы. Catalogs, являющаяся таблицей-предком, содержащие в себе упоминания о
+                категориях товаров в интернет магазине и таблица products являющаяся таблицей-потомком, со всеми
+                товарами этого магазина</p>
+
+            <pre class="prettyprint lang-sql">mysql> SELECT * FROM catalogs;
++------------+-------------------------------------+
+| id_catalog | name                                |
++------------+-------------------------------------+
+|          1 | Процессоры                          |
+|          2 | Материнские платы                   |
+|          3 | Видеоадаптеры                       |
+|          4 | Жёсткие диски                       |
+|          5 | Оперативная память                  |
++------------+-------------------------------------+
+mysql> SELECT * FROM products;
++------------+-------------------------------+------------+
+| id_product | name                          | id_catalog |
++------------+-------------------------------+------------+
+|          1 | Celeron 1.8                   |          1 |
+|          2 | Celeron 2.0GHz                |          1 |
+|          3 | Celeron 2.4GHz                |          1 |
+|          4 | Celeron D 320 2.4GHz          |          1 |
+|          5 | Celeron D 325 2.53GHz         |          1 |
+|          6 | Celeron D 315 2.26GHz         |          1 |
+|          7 | Intel Pentium 4 3.2GHz        |          1 |
+|          8 | Intel Pentium 4 3.0GHz        |          1 |
+|          9 | Intel Pentium 4 3.0GHz        |          1 |
+|         10 | Gigabyte GA-8I848P-RS         |          2 |
+|         11 | Gigabyte GA-8IG1000           |          2 |
+|         12 | Gigabyte GA-8IPE1000G         |          2 |
+|         13 | Asustek P4C800-E Delux        |          2 |
+|         14 | Asustek P4P800-VM\L i865G     |          2 |
+|         15 | Epox EP-4PDA3I                |          2 |
+|         16 | ASUSTEK A9600XT/TD            |          3 |
+|         17 | ASUSTEK V9520X                |          3 |
+|         18 | SAPPHIRE 256MB RADEON 9550    |          3 |
+|         19 | GIGABYTE AGP GV-N59X128D      |          3 |
+|         20 | Maxtor 6Y120P0                |          4 |
+|         21 | Maxtor 6B200P0                |          4 |
+|         22 | Samsung SP0812C               |          4 |
+|         23 | Seagate Barracuda ST3160023A  |          4 |
+|         24 | Seagate ST3120026A            |          4 |
+|         25 | DDR-400 256MB Kingston        |          5 |
+|         26 | DDR-400 256MB Hynix Original  |          5 |
+|         27 | DDR-400 256MB PQI             |          5 |
+|         28 | DDR-400 512MB Kingston        |          5 |
+|         29 | DDR-400 512MB PQI             |          5 |
+|         30 | DDR-400 512MB Hynix           |          5 |
++------------+-------------------------------+------------+
+</pre>
+            <p>При удалении категории из таблицы catalogs, в таблице products останутся товары которые не привязаны
+                ни к одной из категорий, что может повлечь массу проблем для магазина.</p>
+
+            <pre class="prettyprint lang-sql">mysql> DELETE FROM catalogs WHERE name = 'Процессоры';
+
+mysql> SELECT * FROM catalogs;
++------------+-------------------------------------+
+| id_catalog | name                                |
++------------+-------------------------------------+
+|          2 | Материнские платы                   |
+|          3 | Видеоадаптеры                       |
+|          4 | Жёсткие диски                       |
+|          5 | Оперативная память                  |
++------------+-------------------------------------+
+mysql> SELECT * FROM products WHERE id_catalog = 1;
++------------+------------------------+------------+
+| id_product | name                   | id_catalog |
++------------+------------------------+------------+
+|          1 | Celeron 1.8            |          1 |
+|          2 | Celeron 2.0GHz         |          1 |
+|          3 | Celeron 2.4GHz         |          1 |
+|          4 | Celeron D 320 2.4GHz   |          1 |
+|          5 | Celeron D 325 2.53GHz  |          1 |
+|          6 | Celeron D 315 2.26GHz  |          1 |
+|          7 | Intel Pentium 4 3.2GHz |          1 |
+|          8 | Intel Pentium 4 3.0GHz |          1 |
+|          9 | Intel Pentium 4 3.0GHz |          1 |
++------------+------------------------+------------+
+                </pre>
+            <p>Это явление называется нарушением ссылочной целостности</p>
+
+            <p>На ссылочную целостность базы данных как правило оказывают четыре типа изменений:</p>
+
+            <ul>
+                <li>Добавление новой записи в таблице-потомке. Например добавление новой товарной позиции в таблицу
+                    products. Важно заметить что важную роль играет изменение именно таблицы-потомка, т.к изменение
+                    таблицы-предка (catalogs) не приведет к нарушению ссылочной целостности, т.к наличие пустой
+                    категории товаров допустимо
+                </li>
+                <li>Обновление внешнего ключа в таблице-потомке. Эта ситуация похожа на первую и может произойти при
+                    изменении у товара ссылки на несуществующий раздел каталога, например товар с id_catalog равным
+                    50
+                </li>
+                <li>Удаление записи из таблицы-предка. Эта ситуация рассмотрена выше.</li>
+                <li>Изменение записи в таблице-предке. Эта ситуация отличается от рассмотренной выше тем что
+                    категория каталога не удаляется а принимает новый id
+                </li>
+            </ul>
+            <p>Обработка изменений при помощи FOREIGN KEY</p>
+
+            <p>Для того что бы контролировать ссылочную целостность в базе данных необходимо что бы таблицы были
+                связаны при помощи конструкции FOREIGN KEY, которая имеет вид:</p>
+
+
+            <pre class="prettyprint lang-sql">FOREIGN KEY [index_name] (index_col_name, …)
+                REFERENCES tbl_name (index_col_name,…)
+                [ON DELETE {RESTRICT | CASCADE | SET NULL | NO ACTION | SET DEFAULT}]
+                [ON UPDATE {RESTRICT | CASCADE | SET NULL | NO ACTION | SET DEFAULT}]</pre>
+
+            <p>FOREIGN KEY — используется при создании/изменении таблиц-потомков таблицах. В рамках данной статьи
+                FOREIGN KEY, следует использовать в таблице products. Данная конструкция позволяет задать в
+                таблице-потомке внешний ключ с именем index_name на столбцах таблицы которые перечисляется в круглых
+                скобках. Можно использовать один или несколько столбцов.</p>
+
+            <p>Ключевое слово REFERENCES задаёт таблицу-предка tbl_name на которую будет ссылаться внешний ключ.
+                Поля таблицы-предка задаются в круглых скобках, один или несколько.</p>
+
+            <p>Необязательные конструкции ON DELETE и ON UPDATE, определяют поведение MySQL при удалении/обновлении
+                записей из таблицы-предка.</p>
+
+            <p>Допустимые параметры для ключевых слов ON DELETE и ON UPDATE:</p>
+
+            <ul>
+                <li>RESTRICT — Если в таблице-потомке существуют записи ссылающиеся на первичный ключ таблицы-предка
+                    то при удалении или обновлении записей с этим первичным ключом в таблице предке, будет
+                    возвращена ошибка. Ошибка будет возвращаться до тех пор пока не останется ни одной ссылки в
+                    таблице потомке. В MySQL данный параметр означает то же самое что и NO ACTION
+                </li>
+                <li>CASCADE — При удалении/обновлении записей в таблице-предке, будут так же обновлены/удалены
+                    записи из таблицы-потомка с существующим первичным ключом
+                </li>
+                <li>SET NULL — При удалении/обновлении записей в таблице-предке, записи из таблицы-потомка с
+                    существующим первичным ключом будут обновлены на NULL
+                </li>
+                <li>NO ACTION — При удалении/обновлении записей в таблице-предке, записи из таблицы-потомка с
+                    существующим первичным ключом изменены не будут. В MySQL данный параметр означает то же самое
+                    что и RESTRICT
+                </li>
+                <li>SET DEFAULT — Это действие зарезервировано но не обрабатывается в InnoDB</li>
+            </ul>
+            <p>Добавление для таблицы products из примера статьи конструкции:</p>
+
+            <pre class="prettyprint lang-sql">ALTER TABLE products ADD CONSTRAINT fk_catalog
+                FOREIGN KEY (id_catalog) REFERENCES catalogs (id_catalog)
+                ON DELETE CASCADE
+                ON UPDATE CASCADE</pre>
+            <p>приведет к тому что изменения таблицы catalogs приведет к автоматическому изменению таблицы
+                products.</p>
+
+        </div>
+        <div id="manual" class="subgroup">
+
+            <h2>Загрузка данных вручную</h2>
+            (, используя команду insert into;)
+            После создания пустых таблиц их необходимо наполнить данными. Вводить данные в нее можно несколькими
+            способами (ознакомьтесь со всеми, выберите один для исопльзования):<br>
+
+            Пример ввода данных вручную (команда INSERT):
+
+            <pre class="prettyprint lang-sql">insert into products (name, city)values ('Жесткий диск','Париж');</pre>
+            или
+            <pre class="prettyprint lang-sql">insert into products values (NULL,'Жесткий диск','Париж');</pre>
+
+            //т.е в случае если вы вставляете данные во все поля таблицы то их перечислять не обязательно.<br>
+            Таким образом SQL инструкция имеет следующий вид<br>
+            <pre class="prettyprint  lang-sql">INSERT INTO table_name (id, name) VALUES ('id_value', 'name_value');</pre>
+            Записать и выполнить совокупность запросов для занесения нижеприведенных данных в созданные таблицы
+            <pre class="prettyprint lang-sql">insert into имя_таблицы [(поле [,поле]...)] values (константа [,константа]...)</pre>
+        </div>
+        <div id="text" class="subgroup">
+            <h2>Загрузить данные из текстового файла</h2>
+            Это является более предпочтительным, особенно если нужно ввести
+            несколько тысяч записей.
+
+            <br><b>Синтаксис команды LOAD DATA INFILE.</b>
+
+            <pre class="prettyprint lang-sql">DATA [LOW_PRIORITY] [LOCAL] INFILE 'file_name.txt' [REPLACE | IGNORE]
+                INTO TABLE tbl_name
+                [FIELDS
+                [TERMINATED BY 't']
+                [OPTIONALLY] ENCLOSED BY '']
+                [ESCAPED BY '' ]]
+                [LINES TERMINATED BY 'n']
+                [IGNORE number LINES]
+                [(col_name,...)]</pre>
+
+            Пример:
+
+            <pre class="prettyprint lang-sql">LOAD DATA LOCAL INFILE '/MyDocs/categories.txt' REPLACE
+                INTO TABLE category FIELDS TERMINATED BY ';' OPTIONALLY ENCLOSED
+                BY '\"' LINES TERMINATED BY '\n'</pre>
+            В данном случае файл categories.txt находится на машине под управлением MS Windows, в каталоге
+            C:\MyDocs.
+
+            Обратите внимание на UNIX стиль написания пути. Слово
+            <ul>
+                <li><b>REPLACE</b>
+                    В SQL запросе означает, что необходимо замещать записи с совпадающими значениями ключей.
+                </li>
+                <li><b>INTO TABLE</b>
+                    указывает имя таблицы, куда будут импортированы данные.
+                </li>
+                <li><b>FIELDS TERMINATED BY ';'</b>
+                    указывает разделители полей, порядок полей должен быть таким же, как и в таблице назначения,
+                </li>
+                <li><b>OPTIONALLY ENCLOSED BY '\"'</b>
+                    указывает, что поля VARCHAR взяты в двойные кавычки
+                </li>
+                <li><b>LINES TERMINATED BY '\r'</b>
+                    указывает разделители строк.
+                </li>
+            </ul>
+        </div>
+        <div id="soft" class="subgroup">
+            <h2> Программно</h2>
+            Можно использовать утилиту mysqlimport для загрузки данных из текстового файла, или использовать
+            программы MySQL-Front, Mysql Workbench или SQLyog.
+        </div>
+        <div id="data" class="subgroup">
+            <h2>Данные для создания базы</h2>
+
+            <h4>Таблица поставщиков (shippers aka S)</h4>
+            <table style="max-width: 500px;width: 100%">
+                <tr>
+                    <td>Hомеp поставщика</td>
+                    <td>Фамилия</td>
+                    <td>Рейтинг</td>
+                    <td>Город</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Смит</td>
+                    <td>20</td>
+                    <td>Лондон</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Джонс</td>
+                    <td>10</td>
+                    <td>Париж</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Блейк</td>
+                    <td>30</td>
+                    <td>Париж</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Кларк</td>
+                    <td>20</td>
+                    <td>Лондон</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Адамс</td>
+                    <td>30</td>
+                    <td>Афины</td>
+                </tr>
+            </table>
+
+            <h4>Таблица деталей (details aka P)</h4>
+            <table style="max-width: 500px;width: 100%">
+                <tr>
+                    <td>Номер детали</td>
+                    <td>Название</td>
+                    <td>Цвет</td>
+                    <td>Вес</td>
+                    <td>Город</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Гайка</td>
+                    <td>Красный</td>
+                    <td>12</td>
+                    <td>Лондон</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Болт</td>
+                    <td>Зеленый</td>
+                    <td>17</td>
+                    <td>Париж</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Винт</td>
+                    <td>Голубой</td>
+                    <td>17</td>
+                    <td>Рим</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Винт</td>
+                    <td>Красный</td>
+                    <td>14</td>
+                    <td>Лондон</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Кулачок</td>
+                    <td>Голубой</td>
+                    <td>12</td>
+                    <td>Париж</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Блюм</td>
+                    <td>Красный</td>
+                    <td>19</td>
+                    <td>Лондон</td>
+                </tr>
+            </table>
+
+
+            <h4>Таблица изделий (products aka J)</h4>
+            <table style="max-width: 500px;width: 100%">
+                <tr>
+                    <td>Номер изделия</td>
+                    <td>Название</td>
+                    <td>Город</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Жесткий диск</td>
+                    <td>Париж</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Перфоратор</td>
+                    <td>Рим</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Считыватель</td>
+                    <td>Афины</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Принтер</td>
+                    <td>Афины</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Флоппи-диск</td>
+                    <td>Лондон</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Терминал</td>
+                    <td>Осло</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Лента</td>
+                    <td>Лондон</td>
+                </tr>
+            </table>
+
+
+            <h4>Таблица поставок (supplies aka SPJ)</h4>
+            <table style="max-width: 500px;width: 100%">
+                <tr>
+                    <td>Номер поставщика</td>
+                    <td>Номер детали</td>
+                    <td>Номер изделия</td>
+                    <td>Количество</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>200</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>4</td>
+                    <td>700</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>1</td>
+                    <td>400</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>200</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>200</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>500</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>5</td>
+                    <td>600</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>6</td>
+                    <td>400</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>7</td>
+                    <td>800</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>5</td>
+                    <td>2</td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>1</td>
+                    <td>200</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>2</td>
+                    <td>500</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>6</td>
+                    <td>3</td>
+                    <td>300</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>300</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>200</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>500</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>7</td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>2</td>
+                    <td>200</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>1</td>
+                    <td>4</td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>200</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>800</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>4</td>
+                    <td>400</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>4</td>
+                    <td>500</td>
+                </tr>
+            </table>
+        </div>
+        <div id="finish" class="subgroup">
+            <h2>Завершение работы</h2>
+            Убедиться в успешности выполненных действий. При необходимости исправить ошибки.
+
+            <p>5. Выполнить модификацию структуры таблицы supplies (SPJ), добавив поле с датой поставки.
+                Убедиться в
+                успешности выполненных действий. При необходимости исправить ошибки (команда Alter table).</p>
+            <p>6. Уничтожить созданные таблицы, предварительно <strong> сохранив инструкции</strong> для
+                восстановления структуры БД и
+                информационного наполнения, используя средства работы СУБД. Убедиться в успешности выполненных
+                действий.</p>
+            <p>7. Выполнить необходимые действия, написав и выполнив соответствующие запросы для модификации
+                таблиц,
+                чтобы структура соответствовала концептуальной модели учебной базы данных (рисунок ниже).
+                Убедиться
+                в
+                успешности выполненных действий. При необходимости исправить ошибки.</p>
+
+            <img src="img/dbms-lab2/model.png">
+
+            <p>Проверить результат заполнения таблиц, написав и выполнив простейший запрос:</p>
+            <pre class="prettyprint lang-sql">SELECT * FROM имя_таблицы</pre>
+            При наличии ошибок выполнить корректировку, исправив либо удалив ошибочные строки таблиц
+        </div>
+    </section>
+    <section id="questions" class="group">
+        <h1>Вопросы</h1>
+        <ol>
+            <li>В каких режимах возможно создание базы данных?</li>
+            <li>Какие типы данных допустимы при создании таблицы?</li>
+            <li>Как выполнить создание таблицы средствами СУБД?</li>
+            <li>Как выполнить создание таблицы средствами языка SQL?</li>
+            <li>Как разделяются операторы SQL в случае нескольких операторов в запросе?</li>
+            <li>Каким образом выполнить простейшие операции вставки строк данных в таблицу средствами SQL?
+            </li>
+            <li>Каким образом выполнить простейшие операции модификации строк таблицы средствами SQL?</li>
+            <li>Каким образом выполнить просмотр таблицы?</li>
+            <li>Как получить информацию о структуре таблицы в рамках СУБД MySQL?</li>
+        </ol>
+    </section>
+</div>
+
+</div>
+<script type="text/javascript" src="bundle.js?89721a0414d3f08ebd8e"></script></body>
+</html>
