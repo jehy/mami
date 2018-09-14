@@ -4,4 +4,4 @@
 [![dependencies Status](https://david-dm.org/jehy/mami/status.svg)](https://david-dm.org/jehy/mami)
 [![devDependencies Status](https://david-dm.org/jehy/mami/dev-status.svg)](https://david-dm.org/jehy/mami?type=dev)
 
-Здесь выложены материалы, которыми я пользуюсь для чтения курсов и мастерклассов в МАМИ.
+[Здесь выложены материалы](https://jehy.github.io/mami/), которыми я пользуюсь для чтения курсов и мастерклассов в МАМИ.
