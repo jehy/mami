@@ -21,11 +21,11 @@
   },
   {
     "filename": "infosec-lab1",
-    "name": "Лабораторная #1. Разбор и генерация HTTP запроса"
+    "name": "Лабораторная работа #1. Разбор и генерация HTTP запроса"
   },
   {
     "filename": "infosec-lab2",
-    "name": "Лабораторная #2. SQL injections"
+    "name": "Лабораторная работа #2. SQL injections"
   },
   {
     "filename": "infosec-lab3",
@@ -41,7 +41,7 @@
   },
   {
     "filename": "infosec-lab6",
-    "name": "Лабораторная #6. Шифрование"
+    "name": "Лабораторная работа #6. Шифрование"
   },
   {
     "filename": "infosec-lab7",
